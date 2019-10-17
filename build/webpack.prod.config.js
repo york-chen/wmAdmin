@@ -98,7 +98,6 @@ module.exports = {
             }
         ],
         /* Advanced module configuration (click to show) */
-        /* Advanced module configuration (click to show) */
         /*
         下面的配置只是为了让动态require 不报警告
          */
@@ -127,8 +126,7 @@ module.exports = {
         alias: {
             // a list of module name aliases
             "@": path.resolve(__dirname, '../src'),
-            'vue$': 'vue/dist/vue.esm.js',
-            // 'element-ui$': 'element-ui/lib/index.js',
+            'vue$': 'vue/dist/vue.esm.js'
         },
         /* alternative alias syntax (click to show) */
         /* Advanced resolve configuration (click to show) */
@@ -168,21 +166,12 @@ module.exports = {
         new webpack.DllReferencePlugin({
             manifest: require(path.join(__dirname, '..', 'vendor2-manifest.json'))
         }),
-        new webpack.DllReferencePlugin({
-            manifest: require(path.join(__dirname, '..', 'vendor3-manifest.json'))
-        }),
-        new webpack.DllReferencePlugin({
-            manifest: require(path.join(__dirname, '..', 'vendor4-manifest.json'))
-        }),
-        new webpack.DllReferencePlugin({
-            manifest: require(path.join(__dirname, '..', 'vendor5-manifest.json'))
-        }),
         new MiniCssExtractPlugin({
             filename: 'app.[contenthash:8].css',
             chunkFilename: "[name].[contenthash:8].css",
         }),
         new HtmlWebpackPlugin({
-            title: 'Development',
+            title: '完美后台关系管理系统',
             filename: "index.html",
             template: './dist/template.html',
             minify: {

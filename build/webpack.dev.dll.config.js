@@ -3,18 +3,13 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const CompressionPlugin = require('compression-webpack-plugin');
-// const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 
 module.exports = {
     context: path.resolve(__dirname, '..'),
     mode: 'development',
     entry: {
-        vendor1: ['vue', 'vue-router','axios', 'vue-axios', 'vuex'],
+        vendor1: ['vue', 'vue-router','axios', 'vue-axios', 'vuex','qs'],
         vendor2: ['element-ui'],
-        vendor3: ['echarts/lib/echarts','echarts/lib/chart/radar'],
-        vendor4: ['@antv/g2'],
-        vendor5: ['vue-affix','vue-scrollactive', 'qs','js-cookie','dayjs'],
     },
     output: {
         path: path.resolve(__dirname, '../dist'),
@@ -68,8 +63,6 @@ module.exports = {
         }
     },
     plugins: [
-        // new BundleAnalyzerPlugin({analyzerPort: 8090}),
-        // new CompressionPlugin({}),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('development')
         }),
@@ -82,7 +75,7 @@ module.exports = {
             name: "[name]"
         }),
         new HtmlWebpackPlugin({
-            title: 'webpack模板',
+            title: '完美后台关系管理系统',
             filename: 'template.html',
             template: 'index.html',
             inject: 'body'

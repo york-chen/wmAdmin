@@ -139,8 +139,7 @@ module.exports = {
             // a list of module name aliases
             "@": path.resolve(__dirname, '../src'),
             'vue$': 'vue/dist/vue.esm.js',
-            'element-ui$': 'element-ui/lib/index.js',
-            'echarts$': 'echarts/lib/echarts'
+            'element-ui$': 'element-ui/lib/index.js'
         }
         /* alternative alias syntax (click to show) */
         /* Advanced resolve configuration (click to show) */
@@ -156,7 +155,7 @@ module.exports = {
     stats: "errors-only",  // lets you precisely control what bundle information gets displayed
     devServer: {
         proxy: { // proxy URLs to backend development server
-            '/cxtapi': {
+            '/api': {
                 target: 'http://localhost:8000'
                 // target: 'http://192.168.10.180:7001'
                 // pathRewrite: {'^/cxtapi': '/cxtapi'}
@@ -183,17 +182,8 @@ module.exports = {
         new webpack.DllReferencePlugin({
             manifest: require(path.join(__dirname, '..', 'vendor2-manifest.json'))
         }),
-        new webpack.DllReferencePlugin({
-            manifest: require(path.join(__dirname, '..', 'vendor3-manifest.json'))
-        }),
-        new webpack.DllReferencePlugin({
-            manifest: require(path.join(__dirname, '..', 'vendor4-manifest.json'))
-        }),
-        new webpack.DllReferencePlugin({
-            manifest: require(path.join(__dirname, '..', 'vendor5-manifest.json'))
-        }),
         new HtmlWebpackPlugin({
-            title: 'vue学习',
+            title: '完美后台关系管理系统',
             filename: 'index.html',
             template: './dist/template.html',
             inject: 'body'

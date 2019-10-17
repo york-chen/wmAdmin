@@ -3,7 +3,7 @@ import axios from 'axios'
 import vueAxios from 'vue-axios'
 import {Message} from "element-ui";
 import qs from 'qs'
-
+import store from '@/store'
 Vue.use(vueAxios, axios);
 
 axios.interceptors.request.use(
@@ -28,6 +28,7 @@ axios.interceptors.response.use(
         // status === 401、403, 无登录权限，需登录，跳转登录页面
         if (error.response.status === 401 || error.response.status === 403) {
             Message.error('登录过期，请重新登录');
+            store.commit('login/loginOut');
             window.history.replaceState(null, null, '/login')
         } else if (error.response.status === 404) {
             Message.error('服务器搬家啦')

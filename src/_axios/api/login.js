@@ -6,9 +6,3 @@ export const $axLogin = params => {
         url: '/user/login'
     }, params)
 };
-export const $axGetUserInfo = params => {
-    return axios({
-        method: 'get',
-        url: '/user'
-    }, params)
-};

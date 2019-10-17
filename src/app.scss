@@ -5,9 +5,6 @@
 html, body ,.app-wrap{
     height: 100%;
 }
-.app-wrap{
-    overflow: auto;
-}
 .clearfix{
     &:after{
         content: '';
@@ -19,11 +16,6 @@ html, body ,.app-wrap{
 }
 .t-c{
     text-align: center;
-}
-.m-blank{
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
 }
 @import "./element-variables.scss";
 @import "./assets/iconfonts/iconfont.css";

@@ -1,13 +1,15 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '@/pages/home'
-import Login from '@/pages/login'
-import permissionRoutes from './permissionRoutes'
-import store from '@/store'
+import Login from '@/pages/login';
+import MainLayout from '@/layout/mainLayout'
+import Announcement from '@/pages/messageCenter/announcement'
+import VersionDescription from '@/pages/messageCenter/versionDescription'
+import MaintenanceNotice from '@/pages/messageCenter/maintenanceNotice'
+import StopServiceTips from '@/pages/messageCenter/stopServiceTips'
+import RegularMail from '@/pages/mailCenter/regularMail'
+import LimitedMallAdManage from '@/pages/shopCenter/limitedMallAdManage'
 
 Vue.use(VueRouter);
-// 开发环境不使用懒加载, 因为懒加载页面太多的话会造成webpack热更新太慢, 所以只有生产环境使用懒加载
-import _import from '@/routes/_import';
 const createRouter = () => new VueRouter({
     mode: 'history',
     scrollBehavior(to, from, savedPosition) {
@@ -22,56 +24,47 @@ const createRouter = () => new VueRouter({
     routes: [
         {
             path: '/',
-            component:Home
+            component:MainLayout,
+            children:[
+                {
+                    path:'',
+                    redirect:'announcement'
+                },
+                {
+                    path:'announcement',
+                    component:Announcement
+                },
+                {
+                    path:'versionDescription',
+                    component:VersionDescription
+                },
+                {
+                    path:'maintenanceNotice',
+                    component:MaintenanceNotice
+                },
+                {
+                    path:'stopServiceTips',
+                    component:StopServiceTips
+                },
+                {
+                    path:'regularMail',
+                    component:RegularMail
+                },
+                {
+                    path:'limitedMallAdManage',
+                    component:LimitedMallAdManage
+                }
+            ]
         },
         {
             path: '/login',
             component: Login
+        },
+        {
+            path: '*',
+            redirect:'/'
         }
     ]
 });
 const router = createRouter();
-function resetRouter() {
-    console.log('reset')
-    const newRouter = createRouter();
-    router.matcher = newRouter.matcher // the relevant part
-}
-//登出操作
-export function logout() {
-    window.localStorage.token = '';
-    store.state.login.token = '';
-    store.state.login.userInfo = {};
-    resetRouter();
-    router.push('/');
-}
-export function addDynamicRoutes(){
-    let {token,userInfo} = store.state.login,realRoutes = [];
-    if(token){
-        if(userInfo.role){
-            let keys = permissionRoutes.dynamicRoutes.keys();
-            [...keys].forEach(key=>{
-                if(key & userInfo.role){
-                    realRoutes.push(permissionRoutes.dynamicRoutes.get(key));
-                }
-            });
-            if(userInfo.isAdmin){
-                realRoutes.push(permissionRoutes.adminRoutes);
-            }
-        }
-    }
-    realRoutes.push(permissionRoutes.notFoundRoutes);
-    resetRouter();
-    router.addRoutes(realRoutes);
-}
-
-router.onReady(()=>{
-        //登录了需要查看是否有用户的信息
-        store.dispatch('login/sendGetCurUser').then(()=>{
-            addDynamicRoutes();
-        }).catch(()=>{
-            //token失效
-            logout();
-        })
-
-});
 export default router
