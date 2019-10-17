@@ -9,7 +9,7 @@
                 <el-button type="text">
                     <i class="iconfont icontouxiang">管理员</i>
                 </el-button>
-                <el-button @click="loginOut" type="text">[退出]</el-button>
+                <el-button @click="_loginOut" type="text">[退出]</el-button>
             </div>
         </section>
         <section class="body">
@@ -89,7 +89,7 @@
             ...mapMutations({
                 loginOut:'loginOut'
             }),
-            loginOut(){
+            _loginOut(){
                 this.loginOut();
             }
         }

@@ -1,5 +1,5 @@
 import {$axLogin} from '@/_axios/api/login.js'
-import router from "../../../routes";
+import router from "@/routes";
 
 export default {
     namespaced: true,
@@ -17,7 +17,7 @@ export default {
         loginOut(state){
             localStorage.removeItem('userInfo');
             state.userInfo = {};
-            history.replaceState(null,null,'/login');
+            router.replace('/login');
         }
     },
     actions: {
