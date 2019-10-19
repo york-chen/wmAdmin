@@ -4,7 +4,7 @@
                 action="/api/upload"
                 list-type="picture-card"
                 multiple
-                :limit="3"
+                :limit="limit"
                 :file-list="filelist"
                 :on-success="uploadSuc"
                 :on-remove="removeFile"
@@ -34,7 +34,7 @@ export default {
         }
     },
     props:{
-        limit:{type:Number},
+        limit:{type:Number,default:3},
         fileType:{type: Array,default:()=>{return ['image/jpeg','image/png','image/bmp','image/gif','image/tif']}},
         fileSize:{type:Number,default: 2},
         _filelist:{type:Array,default:()=>{return []}}

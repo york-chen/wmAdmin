@@ -32,7 +32,7 @@
         </template>
         <template v-if="form.type==='image'">
             <el-form-item label="图片上传" prop="filelist">
-                <upload-file v-model="form.filelist"></upload-file>
+                <upload-file :limit="3" v-model="form.filelist"></upload-file>
             </el-form-item>
             <el-form-item v-if="form.filelist.length" label="图片预览">
                 <div class="preview-wrap">
