@@ -5,7 +5,7 @@ import ElementUI from 'element-ui'
 import store from './store'
 import '@/app.scss'
 
-Vue.use(ElementUI);
+Vue.use(ElementUI,{size:'small'});
 new Vue({
     router,
     store,

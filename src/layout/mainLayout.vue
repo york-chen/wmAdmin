@@ -7,7 +7,7 @@
             </div>
             <div class="user-info">
                 <el-button type="text">
-                    <i class="iconfont icontouxiang">管理员</i>
+                    <i class="iconfont icon-touxiang">管理员</i>
                 </el-button>
                 <el-button @click="_loginOut" type="text">[退出]</el-button>
             </div>
@@ -150,7 +150,7 @@
             .right{
                 flex: 1;
                 overflow: auto;
-                padding: 20px 50px;
+                padding: 15px;
             }
         }
     }
