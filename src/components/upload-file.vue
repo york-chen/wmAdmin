@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-upload
-                action="https://jsonplaceholder.typicode.com/posts/"
+                action="/api/upload"
                 list-type="picture-card"
                 multiple
                 :limit="3"
@@ -48,7 +48,7 @@ export default {
             const valid = this.fileType.indexOf(file.type) !== -1;
             const isLt2M = file.size / 1024 / 1024 < this.fileSize;
 
-            if (valid) {
+            if (!valid) {
                 this.$message.error('文件格式不正确!');
             }
             if (!isLt2M) {
@@ -59,11 +59,11 @@ export default {
         exceedCallback(files){
             this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件。`);
         },
-        uploadSuc(response){
+        uploadSuc(response,file,filelist){
             this.$emit('change',this.filelist);
         },
-        removeFile(){
-            this.$emit('change',this.filelist);
+        removeFile(file,filelist){
+            this.$emit('change',filelist);
         }
     }
 }

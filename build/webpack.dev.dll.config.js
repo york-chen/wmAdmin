@@ -8,7 +8,7 @@ module.exports = {
     context: path.resolve(__dirname, '..'),
     mode: 'development',
     entry: {
-        vendor1: ['vue', 'vue-router','axios', 'vue-axios', 'vuex','qs'],
+        vendor1: ['vue', 'vue-router','axios', 'vue-axios', 'vuex','qs','dayjs'],
         vendor2: ['element-ui'],
     },
     output: {

@@ -11,6 +11,9 @@
                     </el-option>
                 </el-select>
             </div>
+            <div slot="operation">
+                <el-button @click="handleAddClick" type="primary">新增</el-button>
+            </div>
         </SearchPannel>
         <TableBox v-model="pagination" :action="queryList" class="table">
             <el-table :data="list">
@@ -43,8 +46,12 @@
                 </el-table-column>
             </el-table>
         </TableBox>
-        <el-dialog center :visible.sync="showDialog">
-            <credit-or-edit ref="creditOrEdit"></credit-or-edit>
+        <el-dialog width="40%" center :visible.sync="showDialog">
+            <credit-or-edit v-if="showDialog" ref="creditOrEdit"></credit-or-edit>
+            <span slot="footer" class="dialog-footer">
+            <el-button @click="closeDialog">取 消</el-button>
+            <el-button type="primary" @click="submitForm">提交审核</el-button>
+          </span>
         </el-dialog>
     </div>
 </template>
@@ -72,7 +79,7 @@
                     pageSize: 10,
                     total: 0
                 },
-                showDialog:true
+                showDialog:false
             }
         },
         computed:{
@@ -81,6 +88,12 @@
             })
         },
         methods:{
+            openDialog(){
+              this.showDialog = true;
+            },
+            closeDialog(){
+              this.showDialog = false
+            },
             indexMethod(index) {
                 return index +1;
             },
@@ -92,7 +105,28 @@
                   case '3':type = "danger";break;
               }
             },
-            handleEditClick(){},
+            handleEditClick(row){
+                this.openDialog();
+                this.$nextTick(()=>{
+                    this.$refs['creditOrEdit'].initFormData(row);
+                })
+            },
+            handleAddClick(){
+                this.openDialog();
+            },
+            submitForm(){
+              let data = this.$refs['creditOrEdit'].getData();
+              console.log(data);
+              if(data){
+                if(data.id){//编辑
+                    this.sendEditItem(data);
+                }else {//新增
+                    this.sendAddItem(data);
+                }
+              }
+            },
+            sendAddItem(data){},
+            sendEditItem(data){},
             queryList(){}
         }
     }

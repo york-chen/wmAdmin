@@ -21,4 +21,7 @@
     .danger{
         color: #F56C6C;
     }
+    .warning{
+        color: #E6A23C;
+    }
 </style>
