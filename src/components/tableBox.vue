@@ -52,6 +52,7 @@
                 this.action && this.action();
             },
             handleSizeChange(pageSize) {
+                console.log(this.pagination)
                 this.pagination.pageIndex = 1;
                 this.pagination.pageSize = pageSize;
                 this.$emit('change',this.pagination);
