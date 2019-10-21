@@ -29,4 +29,20 @@ versionDescStatus.set('2','已通过');
 versionDescStatus.set('3','已拒绝');
 
 
+/**
+ * 常规邮件 状态类型枚举
+ * @type {Map<any, any>}
+ */
+export const regularMailStatus = new Map();
+regularMailStatus.set('all',[
+    {value:'',text:'全部'},
+    {value:'1',text:'待审核'},
+    {value:'2',text:'已通过'},
+    {value:'3',text:'已拒绝'}
+]);
+regularMailStatus.set('1','待审核');
+regularMailStatus.set('2','已通过');
+regularMailStatus.set('3','已拒绝');
+
+
 
