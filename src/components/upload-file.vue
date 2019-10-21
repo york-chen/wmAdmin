@@ -1,71 +1,57 @@
 <template>
     <div>
         <el-upload
-                action="/api/upload"
-                list-type="picture-card"
-                multiple
+                ref="upload"
+                action="https://jsonplaceholder.typicode.com/posts/"
                 :limit="limit"
                 :file-list="filelist"
                 :on-success="uploadSuc"
                 :on-remove="removeFile"
-                :on-preview="handlePictureCardPreview"
                 :before-upload="beforeUpload"
                 :on-exceed="exceedCallback">
-            <i class="el-icon-plus"></i>
+            <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
         </el-upload>
-        <el-dialog  append-to-body :visible.sync="dialogVisible">
-            <div class="t-c">
-                <img width="100%" :src="dialogImageUrl" alt="">
-            </div>
-        </el-dialog>
     </div>
 </template>
 <script>
-export default {
-    model:{
-        prop:'_filelist',
-        event:'change'
-    },
-    data(){
-        return{
-            dialogImageUrl: '',
-            dialogVisible: false,
-            filelist:this._filelist
-        }
-    },
-    props:{
-        limit:{type:Number,default:3},
-        fileType:{type: Array,default:()=>{return ['image/jpeg','image/png','image/bmp','image/gif','image/tif']}},
-        fileSize:{type:Number,default: 2},
-        _filelist:{type:Array,default:()=>{return []}}
-    },
-    methods:{
-        handlePictureCardPreview(file) {
-            this.dialogImageUrl = file.url;
-            this.dialogVisible = true;
+    export default {
+        model:{
+            prop:'_filelist',
+            event:'change'
         },
-        beforeUpload(file) {
-            const valid = this.fileType.indexOf(file.type) !== -1;
-            const isLt2M = file.size / 1024 / 1024 < this.fileSize;
-
-            if (!valid) {
-                this.$message.error('文件格式不正确!');
+        data(){
+            return{
+                filelist:this._filelist
             }
-            if (!isLt2M) {
-                this.$message.error('上传头像图片大小不能超过 2MB!');
+        },
+        props:{
+            limit:{type:Number,default:1},
+            fileType:{type: Array,default:()=>{return ['text/plain']}},
+            fileSize:{type:Number,default: 2},
+            _filelist:{type:Array,default:()=>{return []}}
+        },
+        methods:{
+            beforeUpload(file) {
+                const valid = this.fileType.indexOf(file.type) !== -1;
+                const isLt2M = file.size / 1024 / 1024 < this.fileSize;
+                if (!valid) {
+                    this.$message.error('文件格式不正确!');
+                }
+                if (!isLt2M) {
+                    this.$message.error('上传文件大小不能超过 2MB!');
+                }
+                return valid && isLt2M;
+            },
+            exceedCallback(files){
+                this.$message.warning(`当前限制选择 ${this.limit} 个文件，本次选择了 ${files.length} 个文件。`);
+            },
+            uploadSuc(response,file,filelist){
+                this.$emit('change',this.filelist);
+            },
+            removeFile(file,filelist){
+                this.$emit('change',filelist);
             }
-            return valid && isLt2M;
-        },
-        exceedCallback(files){
-            this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件。`);
-        },
-        uploadSuc(response,file,filelist){
-            this.$emit('change',this.filelist);
-        },
-        removeFile(file,filelist){
-            this.$emit('change',filelist);
         }
     }
-}
 </script>
 <style type="text/scss" lang="scss"></style>

@@ -8,6 +8,8 @@ import MaintenanceNotice from '@/pages/messageCenter/maintenanceNotice'
 import StopServiceTips from '@/pages/messageCenter/stopServiceTips'
 import RegularMail from '@/pages/mailCenter/regularMail'
 import LimitedMallAdManage from '@/pages/shopCenter/limitedMallAdManage'
+import LegendMallAdManage from '@/pages/shopCenter/legendMallAdManage'
+import BattlepassMallAdManage from '@/pages/shopCenter/battlepassMallAdManage'
 
 Vue.use(VueRouter);
 const createRouter = () => new VueRouter({
@@ -53,6 +55,14 @@ const createRouter = () => new VueRouter({
                 {
                     path:'limitedMallAdManage',
                     component:LimitedMallAdManage
+                },
+                {
+                    path:'legendMallAdManage',
+                    component:LegendMallAdManage
+                },
+                {
+                    path:'battlepassMallAdManage',
+                    component:BattlepassMallAdManage
                 }
             ]
         },
