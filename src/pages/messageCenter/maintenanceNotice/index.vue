@@ -12,7 +12,7 @@
                 </el-select>
             </div>
             <div slot="operation">
-                <el-button @click="create" type="primary">新增</el-button>
+                <el-button @click="handleAddClick" type="primary">新增</el-button>
             </div>
         </SearchPannel>
         <TableBox v-model="pagination" :action="queryList" class="table">
@@ -31,7 +31,7 @@
                 </el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="{row}">
-                        <el-button @click="update(row)" type="text">修改</el-button>
+                        <el-button @click="handleEditClick(row)" type="text">修改</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -39,9 +39,9 @@
         <el-dialog width="40%" center :visible.sync="showDialog">
             <credit-or-edit v-if="showDialog" ref="creditOrEdit"></credit-or-edit>
             <span slot="footer" class="dialog-footer">
-                <el-button @click="showDialog = false">取 消</el-button>
-                <el-button type="primary" @click="submitForm">提交审核</el-button>
-            </span>
+            <el-button @click="closeDialog">取 消</el-button>
+            <el-button type="primary" @click="submitForm">提交审核</el-button>
+          </span>
         </el-dialog>
     </div>
 </template>
@@ -53,39 +53,38 @@
     import colorText from '@/components/color-text'
     import creditOrEdit from './createOrEdit'
     import {createNamespacedHelpers} from 'vuex'
-    const {mapState} = createNamespacedHelpers('announcement');
+    const {mapState} = createNamespacedHelpers('safeguard');
+
     export default {
-        name: "notice",
+        name: "safeguard",
         components:{TableBox,SearchPannel,colorText,creditOrEdit},
         created() {
             this.statusMap = safeguardStatus;
+        },
+        data(){
+            return {
+                queryParams:{status:''},
+                pagination: {
+                    pageIndex: 1,
+                    pageSize: 10,
+                    total: 0
+                },
+                showDialog:false
+            }
         },
         computed:{
             ...mapState({
                 list:'list'
             })
         },
-        data() {
-            return {
-                queryParams: {
-                    status: ''
-                },
-                pagination: {
-                    pageIndex: 1,
-                    pageSize: 10,
-                    total: 0
-                },
-                showDialog: false
-            };
-        },
-        methods: {
-            create() {
-
+        methods:{
+            openDialog(){
+                this.showDialog = true;
             },
-            queryList() {
-
+            closeDialog(){
+                this.showDialog = false
             },
-            formatStatusType(status) {
+            formatStatusType(status){
                 let type = 'primary';
                 switch (status) {
                     case '1':type = "primary";break;
@@ -93,9 +92,29 @@
                     case '3':type = "danger";break;
                 }
             },
-            update() {
-
-            }
+            handleEditClick(row){
+                this.openDialog();
+                this.$nextTick(()=>{
+                    this.$refs['creditOrEdit'].initFormData(row);
+                })
+            },
+            handleAddClick(){
+                this.openDialog();
+            },
+            submitForm(){
+                let data = this.$refs['creditOrEdit'].getData();
+                console.log(data);
+                if(data){
+                    if(data.id){//编辑
+                        this.sendEditItem(data);
+                    }else {//新增
+                        this.sendAddItem(data);
+                    }
+                }
+            },
+            sendAddItem(data){},
+            sendEditItem(data){},
+            queryList(){}
         }
     }
 </script>

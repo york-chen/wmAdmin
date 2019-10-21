@@ -6,6 +6,8 @@ import versionDesc from '@/store/modules/versionDescription'
 import limitedMallAd from '@/store/modules/limitedMallAd'
 import legendMallAd from '@/store/modules/legendMallAd'
 import battlepassMallAd from '@/store/modules/battlepassMallAd'
+import safeguard from '@/store/modules/safeguard'
+import stopService from '@/store/modules/stopService'
 
 Vue.use(Vuex);
 
@@ -16,6 +18,8 @@ export default new Vuex.Store({
         versionDesc,
         limitedMallAd,
         legendMallAd,
-        battlepassMallAd
+        battlepassMallAd,
+        safeguard,
+        stopService
     }
 })
