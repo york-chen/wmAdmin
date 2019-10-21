@@ -44,5 +44,33 @@ regularMailStatus.set('1','待审核');
 regularMailStatus.set('2','已通过');
 regularMailStatus.set('3','已拒绝');
 
+/**
+ * 维护预告
+ * @type {Map<any, any>}
+ */
+export const safeguardStatus = new Map();
+safeguardStatus.set('all',[
+    {value:'',text:'全部'},
+    {value:'1',text:'待审核'},
+    {value:'2',text:'已通过'},
+    {value:'3',text:'已拒绝'}
+]);
+safeguardStatus.set('1','待审核');
+safeguardStatus.set('2','已通过');
+safeguardStatus.set('3','已拒绝');
 
+/**
+ * 维护预告
+ * @type {Map<any, any>}
+ */
+export const stopServiceStatus = new Map();
+stopServiceStatus.set('all',[
+    {value:'',text:'全部'},
+    {value:'1',text:'待审核'},
+    {value:'2',text:'已通过'},
+    {value:'3',text:'已拒绝'}
+]);
+stopServiceStatus.set('1','待审核');
+stopServiceStatus.set('2','已通过');
+stopServiceStatus.set('3','已拒绝');
 
