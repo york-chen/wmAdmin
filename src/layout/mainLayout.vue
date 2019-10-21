@@ -62,6 +62,15 @@
                             <i class="iconfont icon-guanggaogongguan"></i>
                             <span slot="title">限时商城广告管理</span>
                         </el-menu-item>
+                        <el-menu-item index="/legendMallAdManage">
+                            <i class="iconfont icon-guanggaogongguan"></i>
+                            <span slot="title">传奇商城广告管理</span>
+                        </el-menu-item>
+                        <el-menu-item index="/battlepassMallAdManage">
+                            <i class="iconfont icon-guanggaogongguan"></i>
+                            <span slot="title">battlepass
+                                商城广告管理</span>
+                        </el-menu-item>
                     </el-submenu>
                 </el-menu>
             </div>
@@ -142,7 +151,7 @@
             display: flex;
             flex-direction: row;
             .left{
-                width: 200px;
+                width: 260px;
                 height: 100%;
                 background-color: #42485b;
                 margin-top: -1px;
@@ -153,9 +162,6 @@
                 padding: 15px;
             }
         }
-    }
-    .menu-bar{
-        text-align: center;
     }
     .el-menu{
         border-right: none;

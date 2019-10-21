@@ -57,7 +57,7 @@
 </template>
 
 <script>
-    import {limitedMallAdStatus} from '@/utils/constents'
+    import {battlepassMallAdStatus} from '@/utils/constents'
     import TableBox from '@/components/tableBox'
     import SearchPannel from '@/components/search-pannel'
     import colorText from '@/components/color-text'
@@ -69,7 +69,7 @@
         name: "notice",
         components:{TableBox,SearchPannel,colorText,creditOrEdit},
         created() {
-            this.statusMap = limitedMallAdStatus;
+            this.statusMap = battlepassMallAdStatus;
         },
         data(){
             return {

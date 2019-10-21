@@ -1,5 +1,5 @@
 <template>
-    <el-form :model="form" :rules="rules" ref="form" label-width="80px" class="form-wrap">
+    <el-form :model="form" :rules="rules" ref="form" label-width="100px" class="form-wrap">
         <el-form-item label="邮件标题" prop="versionNum">
             <el-input v-model="form.versionNum"></el-input>
         </el-form-item>
@@ -40,20 +40,32 @@
             </el-date-picker>
             {{_publishTime}}
         </el-form-item>
+        <el-form-item label="发布群体" prop="publishGroup">
+            <el-select v-model="form.publishGroup" placeholder="请选择发布群体">
+                <el-option label="全服" value="all"></el-option>
+                <el-option label="指定用户" value="designUser"></el-option>
+            </el-select>
+        </el-form-item>
+        <el-form-item label="上传用户id" prop="userids">
+            <upload-file v-model="form.userids"></upload-file>
+        </el-form-item>
     </el-form>
 </template>
 <script>
     import areaMixin from '@/mixins/area-group'
     import colorText from '@/components/color-text'
+    import uploadFile from '@/components/upload-file'
     export default {
-        components:{colorText},
+        components:{colorText,uploadFile},
         mixins:[areaMixin],
         created(){
             this.rules = {
                 versionNum: [{required: true, message: '请选择图片模板', trigger: 'change'}],
                 content: [{required: true, message: '请选择公告模板', trigger: 'change'}],
                 area: [{required: true, message: '请选择发布区组', trigger: 'change'}],
-                publishTime: [{required: true, message: '请选择定时发布时间', trigger: 'change'}]
+                publishTime: [{required: true, message: '请选择定时发布时间', trigger: 'change'}],
+                publishGroup: [{required: true, message: '请选择发布群体', trigger: 'change'}],
+                userids:[{required: true, message: '请上传用户id', trigger: 'change'}]
             };
             this.appendixRules = {
                 id: [
@@ -71,7 +83,8 @@
                     content:'',
                     area:'',
                     publishTime:'',
-                    appendixList:[{id:'',number:''}]
+                    appendixList:[{id:'',number:''}],
+                    userids:[]
                 }
             }
         },
