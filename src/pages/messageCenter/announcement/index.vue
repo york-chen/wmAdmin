@@ -127,7 +127,12 @@
             },
             sendAddItem(data){},
             sendEditItem(data){},
-            queryList(){}
+            queryList(){
+
+            }
+        },
+        mounted() {
+            this.queryList();
         }
     }
 </script>

@@ -54,7 +54,7 @@ const httpServer = (opts, data) => {
     // http默认配置
     let httpDefaultOpts = {
         method: opts.method, // 必填
-        url: `/api${opts.url}`, // 必填
+        url: `/wmApi${opts.url}`, // 必填
         timeout: timeout,
         headers: Object.assign(headers, opts.headers)
     };

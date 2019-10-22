@@ -1,4 +1,4 @@
-import {$axLogin} from '@/_axios/api/login.js'
+import {$axLogin} from '@/_axios/api/login'
 import router from "@/routes";
 
 export default {

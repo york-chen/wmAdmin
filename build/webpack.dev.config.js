@@ -155,13 +155,13 @@ module.exports = {
     stats: "errors-only",  // lets you precisely control what bundle information gets displayed
     devServer: {
         proxy: { // proxy URLs to backend development server
-            '/api': {
-                target: 'http://39.100.126.65:8192'
+            '/wmApi': {
+                target: 'http://dev.zhongcheng.tech:8196',
                 // target: 'http://192.168.10.180:7001'
-                // pathRewrite: {'^/cxtapi': '/cxtapi'}
+                pathRewrite: {'^/wmApi': ''}
             }
         },
-        port: 3000,
+        port: 5000,
         contentBase: path.join(__dirname, '../dist'), // boolean | string | array, static file location
         compress: true, // enable gzip compression
         historyApiFallback: true, // true for index.html upon 404, object for multiple paths
