@@ -8,7 +8,7 @@
                 <el-form-item label="" prop="username">
                     <el-input
                             placeholder="请输入用户名"
-                            prefix-icon="iconfont icontouxiang"
+                            prefix-icon="iconfont icon-touxiang"
                             v-model="loginForm.username">
                     </el-input>
                 </el-form-item>
@@ -16,7 +16,7 @@
                     <el-input
                             type="password"
                             placeholder="请输入密码"
-                            prefix-icon="iconfont iconmima"
+                            prefix-icon="iconfont icon-mima"
                             v-model="loginForm.password">
                     </el-input>
                 </el-form-item>
@@ -69,7 +69,7 @@
     .wrap-bg{
         height: 100%;
         overflow: auto;
-        background: url('../../assets/images/login-bg.png') no-repeat;
+        background: url('../../assets/images/bg.jpg') no-repeat;
         background-size: cover;
         position: relative;
     }
@@ -83,7 +83,7 @@
         .login-title{
             font-size: 26px;
             font-weight: 400;
-            color: #fff;
+            color: #000;
         }
         .login-action{
             width: 100%;

@@ -1,7 +1,6 @@
 <template>
     <el-form :model="form" :rules="rules" ref="form" label-width="80px" class="form-wrap">
-        <el-form-item prop="content" label-width="0">
-            <div class="strong">停机维护中提示</div>
+        <el-form-item prop="content" label="提示内容">
             <el-input v-model="form.content" type="textarea" placeholder="请输入停机维护中的提示信息" rows="5"></el-input>
         </el-form-item>
         <el-form-item label="发布区组" prop="area">

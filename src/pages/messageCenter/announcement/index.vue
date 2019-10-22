@@ -46,7 +46,7 @@
                 </el-table-column>
             </el-table>
         </TableBox>
-        <el-dialog width="40%" center :visible.sync="showDialog">
+        <el-dialog center :visible.sync="showDialog">
             <credit-or-edit v-if="showDialog" ref="creditOrEdit"></credit-or-edit>
             <span slot="footer" class="dialog-footer">
             <el-button @click="closeDialog">取 消</el-button>

@@ -45,7 +45,7 @@
                     </el-submenu>
                     <el-submenu index="2">
                         <template slot="title">
-                            <i class="iconfont icon-drxx65"></i>
+                            <i class="iconfont icon-youjianguanli"></i>
                             <span>邮件管理</span>
                         </template>
                         <el-menu-item index="/regularMail">
