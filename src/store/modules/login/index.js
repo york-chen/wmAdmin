@@ -23,8 +23,8 @@ export default {
     actions: {
         sendLogin({state},data){
             return $axLogin(data).then(res=>{
-                state.userInfo = res.user;
-                localStorage.setItem('userInfo',JSON.stringify(res.data));
+                state.userInfo = res;
+                localStorage.setItem('userInfo',JSON.stringify(res));
                 return res;
             })
         }

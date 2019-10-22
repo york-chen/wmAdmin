@@ -18,7 +18,7 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
     response => {
-        if (response.data && typeof response.data === 'object' && response.data.code !== 200) {
+        if (response.data && typeof response.data === 'object' && response.data.code !== '0') {
             Message.error(response.data.message || '抱歉，服务器出现未知的错误');
             return Promise.reject(response);
         }
@@ -29,7 +29,6 @@ axios.interceptors.response.use(
         if (error.response.status === 401 || error.response.status === 403) {
             Message.error('登录过期，请重新登录');
             store.commit('login/loginOut');
-            window.history.replaceState(null, null, '/login')
         } else if (error.response.status === 404) {
             Message.error('服务器搬家啦')
         } else if (error.response.status === 500) {
@@ -38,8 +37,9 @@ axios.interceptors.response.use(
             Message.error('服务器无响应，请稍后再试')
         } else if (error.response.status === 504) {
             Message.error('服务器响应超时，请稍后再试')
+        }else{
+            Message.error('抱歉，服务器出现未知的错误');
         }
-        Message.error('抱歉，服务器出现未知的错误');
         return Promise.reject(error)
     }
 );
@@ -48,8 +48,7 @@ const timeout = 60 * 1000;
 const httpServer = (opts, data) => {
     // 设置默认headers
     let headers = {
-        'Content-Type': 'application/json',
-        Authorization:'Bearer '+ window.localStorage.getItem('token')
+        'Content-Type': 'application/x-www-form-urlencoded'
     };
     // http默认配置
     let httpDefaultOpts = {

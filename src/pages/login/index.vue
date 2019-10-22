@@ -58,7 +58,9 @@
             handleClick(promise){
                 this.$refs['loginForm'].validate((valid) => {
                     if (valid) {
-                        promise(this.sendLogin(this.loginForm))
+                        promise(this.sendLogin(this.loginForm).then(()=>{
+                            this.$router.push('/')
+                        }))
                     }
                 });
             }

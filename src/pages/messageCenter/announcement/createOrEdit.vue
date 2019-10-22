@@ -4,25 +4,22 @@
             <el-col :span="6">
                 <el-form-item prop="type">
                     <el-select v-model="form.type" placeholder="请选择公告模板">
-                        <el-option label="文字模板" value="text"></el-option>
-                        <el-option label="图片模板" value="image"></el-option>
+                        <el-option v-for="item in templateTypeMap.get('all')" :key="item.value" :label="item.text" :value="item.value"></el-option>
                     </el-select>
                 </el-form-item>
             </el-col>
-            <template v-if="form.type==='image'">
+            <template v-if="form.type==='NOTICE_IMG'">
                 <el-col class="line" :span="1">&nbsp;</el-col>
                 <el-col :span="6">
                     <el-form-item prop="template">
                         <el-select v-model="form.template" placeholder="请选择图片模板">
-                            <el-option label="图片模板一" value="1"></el-option>
-                            <el-option label="图片模板二" value="2"></el-option>
-                            <el-option label="图片模板三" value="3"></el-option>
+                            <el-option v-for="item in templateMap.get('all')" :key="item.value" :label="item.text" :value="item.value"></el-option>
                         </el-select>
                     </el-form-item>
                 </el-col>
             </template>
         </el-form-item>
-        <template v-if="form.type ==='text'">
+        <template v-if="form.type ==='NOTICE_WORD'">
             <el-form-item label="公告标题" prop="title">
                 <el-input v-model="form.title"></el-input>
             </el-form-item>
@@ -30,7 +27,7 @@
                 <el-input type="textarea" :rows="5" v-model="form.content"></el-input>
             </el-form-item>
         </template>
-        <template v-if="form.type==='image'">
+        <template v-if="form.type==='NOTICE_IMG'">
             <el-form-item label="图片上传" prop="filelist">
                 <upload-file :limit="3" v-model="form.filelist"></upload-file>
             </el-form-item>
@@ -43,9 +40,7 @@
             </el-form-item>
             <el-form-item label="显示按钮" prop="btns">
                 <el-radio-group v-model="form.btns">
-                    <el-radio label="传奇商城"></el-radio>
-                    <el-radio label="版本说明"></el-radio>
-                    <el-radio label="battle pass"></el-radio>
+                    <el-radio v-for="item in btnMap.get('all')" :key="item.value" :label="item.value">{{item.text}}</el-radio>
                 </el-radio-group>
             </el-form-item>
         </template>
@@ -78,6 +73,7 @@
     import uploadFile from '@/components/upload-img'
     import areaMixin from '@/mixins/area-group'
     import colorText from '@/components/color-text'
+    import {templateMap,templateTypeMap,btnMap} from '@/utils/constents'
     export default {
         components:{uploadFile,colorText},
         mixins:[areaMixin],
@@ -92,12 +88,15 @@
                 publishTime: [{required: true, message: '请选择定时发布时间', trigger: 'change'}],
                 stopTime: [{required: true, message: '请选择定时关闭时间', trigger: 'change'}],
                 filelist: [{required: true, message: '请上传图片', trigger: 'change'}],
-            }
+            };
+            this.templateMap = templateMap;
+            this.templateTypeMap = templateTypeMap;
+            this.btnMap = btnMap;
         },
         data(){
             return{
                 form:{
-                    type:'text',
+                    type:'NOTICE_WORD',
                     template:'',
                     title:'',
                     content:'',

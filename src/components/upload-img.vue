@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-upload
-                action="/api/upload"
+                action="/wmApi/upload"
                 list-type="picture-card"
                 multiple
                 :limit="limit"
@@ -21,6 +21,7 @@
     </div>
 </template>
 <script>
+import {$axUploadImg} from '@/_axios/api/common'
 export default {
     model:{
         prop:'_filelist',
@@ -47,14 +48,14 @@ export default {
         beforeUpload(file) {
             const valid = this.fileType.indexOf(file.type) !== -1;
             const isLt2M = file.size / 1024 / 1024 < this.fileSize;
-
             if (!valid) {
                 this.$message.error('文件格式不正确!');
+                return false
             }
             if (!isLt2M) {
                 this.$message.error('上传图片大小不能超过 2MB!');
+                return false
             }
-            return valid && isLt2M;
         },
         exceedCallback(files){
             this.$message.warning(`当前限制选择 ${this.limit} 个文件，本次选择了 ${files.length} 个文件。`);
@@ -65,6 +66,11 @@ export default {
         removeFile(file,filelist){
             this.$emit('change',filelist);
         }
+    },
+    mounted() {
+        document.querySelector('.el-upload-list__item-actions').addEventListener('click',()=>{
+            alert(1)
+        })
     }
 }
 </script>
