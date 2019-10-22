@@ -84,6 +84,7 @@
             font-size: 26px;
             font-weight: 400;
             color: #000;
+            margin-bottom: 30px;
         }
         .login-action{
             width: 100%;
