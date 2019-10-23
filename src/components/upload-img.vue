@@ -63,14 +63,14 @@ export default {
         uploadSuc(response,file,filelist){
             filelist.forEach(item=>{
                 if(item.uid === file.uid){
-                    item._imgCode = response.imgCode;
+                    item.imgCode = response.imgCode;
                     item._url = response.url;
                 }
             });
-            this.$emit('change',filelist.map(item=>({imgCode:item._imgCode,url:item._url,_url:item.url})));
+            this.$emit('change',filelist.map(item=>({imgCode:item.imgCode,url:item._url,_url:item.url})));
         },
         removeFile(file,filelist){
-            this.$emit('change',filelist.map(item=>({imgCode:item._imgCode,url:item._url,_url:item.url})));
+            this.$emit('change',filelist.map(item=>({imgCode:item.imgCode,url:item._url,_url:item.url})));
         }
     }
 }

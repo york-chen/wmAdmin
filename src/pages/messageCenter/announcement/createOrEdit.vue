@@ -34,7 +34,7 @@
             <el-form-item v-if="form.filelist.length" label="图片预览">
                 <div class="preview-wrap">
                     <template v-for="item in form.filelist">
-                        <img class="preview" :src="item._url" :key="item.imgCode" alt="">
+                        <img class="preview" :src="item._url||item.url" :key="item.imgCode" alt="">
                     </template>
                 </div>
             </el-form-item>
@@ -146,7 +146,6 @@
                     let data,form = this.form;
                     form.planPubStartTime = this.$dayjs(form.planPubStartTime).format('YYYY-MM-DD HH:mm:ss');
                     form.planPubEndTime = this.$dayjs(form.planPubEndTime).format('YYYY-MM-DD HH:mm:ss');
-                    debugger
                     if(form.eventType === 'NOTICE_WORD'){
                         data = {
                             "eventType":form.eventType,
@@ -174,7 +173,7 @@
             }
         },
         watch:{
-            'form.filelist'(){
+            'form.filelist'(){//为了解决按钮下拉框不 实时更新的 将就写法  以后再优化
                 let btns = this.form.btns,fileList = this.form.filelist,tempObj = {},arr = [];
                 btns.forEach(item=>{
                     tempObj[item.imgCode] = item.btn;
