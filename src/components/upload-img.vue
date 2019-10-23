@@ -61,16 +61,11 @@ export default {
             this.$message.warning(`当前限制选择 ${this.limit} 个文件，本次选择了 ${files.length} 个文件。`);
         },
         uploadSuc(response,file,filelist){
-            this.$emit('change',this.filelist);
+            this.$emit('change',filelist.map(item=>({imgCode:item.imgCode,url:item.url})));
         },
         removeFile(file,filelist){
-            this.$emit('change',filelist);
+            this.$emit('change',filelist.map(item=>({imgCode:item.imgCode,url:item.url})));
         }
-    },
-    mounted() {
-        document.querySelector('.el-upload-list__item-actions').addEventListener('click',()=>{
-            alert(1)
-        })
     }
 }
 </script>

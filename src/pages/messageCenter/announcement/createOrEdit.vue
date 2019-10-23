@@ -38,10 +38,14 @@
                     </template>
                 </div>
             </el-form-item>
-            <el-form-item label="显示按钮" prop="btns">
-                <el-radio-group v-model="form.btns">
-                    <el-radio v-for="item in btnMap.get('all')" :key="item.value" :label="item.value">{{item.text}}</el-radio>
-                </el-radio-group>
+            <el-form-item label="显示按钮" prop="blank">
+                <el-col v-for="(item,index) in form.btns" :key="item.imgCode" :span="8">
+                    <el-form-item :prop="'btns.'+ index +'.btn'" :rules="btnRule.btn">
+                        <el-select v-model="item.btn" placeholder="请选择显示按钮">
+                            <el-option v-for="item in btnMap.get('all')" :key="item.value" :label="item.text" :value="item.value"></el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-col>
             </el-form-item>
         </template>
         <el-form-item label="发布区组" prop="area">
@@ -83,11 +87,14 @@
                 type: [{required: true, message: '请选择公告模板', trigger: 'change'}],
                 title: [{required: true, message: '请输入公告标题', trigger: 'blur'}],
                 content: [{required: true, message: '请输入公告内容', trigger: 'blur'}],
-                btns: [{required: true, message: '请选择显示按钮', trigger: 'change'}],
                 area: [{required: true, message: '请选择发布区组', trigger: 'change'}],
                 publishTime: [{required: true, message: '请选择定时发布时间', trigger: 'change'}],
                 stopTime: [{required: true, message: '请选择定时关闭时间', trigger: 'change'}],
                 filelist: [{required: true, message: '请上传图片', trigger: 'change'}],
+                blank: [{required: true, message: '请输入公告标题', trigger: 'blur'}]
+            };
+            this.btnRule = {
+              btn:[{required: true, message: '请选择显示按钮', trigger: 'change'}]
             };
             this.templateMap = templateMap;
             this.templateTypeMap = templateTypeMap;
@@ -104,7 +111,8 @@
                     area:'',
                     publishTime:'',
                     stopTime:'',
-                    filelist:[]
+                    filelist:[],
+                    blank:'blank'
                 }
             }
         },
@@ -119,8 +127,18 @@
                 let flag = false;
                 this.$refs['form'].validate(valid=>{
                     flag = valid;
-                })
+                });
                 return flag?this.form:flag;
+            }
+        },
+        watch:{
+            'form.filelist'(){
+                let btns = this.form.btns,fileList = this.form.filelist,tempObj = {},arr = [];
+                btns.forEach(item=>{
+                    tempObj[item.imgCode] = item;
+                });
+                arr = fileList.map(item=>({...item,btn:tempObj[item.imgCode]?tempObj[item.imgCode]:''}))
+                this.form.btns = arr;
             }
         }
     }
