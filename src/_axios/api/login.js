@@ -6,3 +6,9 @@ export const $axLogin = params => {
         url: '/login'
     }, params)
 };
+export const $axLogout = params => {
+    return axios({
+        method: 'post',
+        url: '/logout'
+    }, params)
+};

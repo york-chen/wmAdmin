@@ -61,10 +61,16 @@ export default {
             this.$message.warning(`当前限制选择 ${this.limit} 个文件，本次选择了 ${files.length} 个文件。`);
         },
         uploadSuc(response,file,filelist){
-            this.$emit('change',filelist.map(item=>({imgCode:item.imgCode,url:item.url})));
+            filelist.forEach(item=>{
+                if(item.uid === file.uid){
+                    item._imgCode = response.imgCode;
+                    item._url = response.url;
+                }
+            });
+            this.$emit('change',filelist.map(item=>({imgCode:item._imgCode,url:item._url,_url:item.url})));
         },
         removeFile(file,filelist){
-            this.$emit('change',filelist.map(item=>({imgCode:item.imgCode,url:item.url})));
+            this.$emit('change',filelist.map(item=>({imgCode:item._url,url:item._url,_url:item.url})));
         }
     }
 }

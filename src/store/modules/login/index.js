@@ -1,4 +1,4 @@
-import {$axLogin} from '@/_axios/api/login'
+import {$axLogin,$axLogout} from '@/_axios/api/login'
 import router from "@/routes";
 
 export default {
@@ -13,13 +13,6 @@ export default {
             }
         }()
     },
-    mutations:{
-        loginOut(state){
-            localStorage.removeItem('userInfo');
-            state.userInfo = {};
-            router.replace('/login');
-        }
-    },
     actions: {
         sendLogin({state},data){
             return $axLogin(data).then(res=>{
@@ -27,6 +20,13 @@ export default {
                 localStorage.setItem('userInfo',JSON.stringify(res));
                 return res;
             })
+        },
+        sendLoginout({state}){
+            $axLogout().then(()=>{
+                localStorage.removeItem('userInfo');
+                state.userInfo = {};
+                router.replace('/login');
+            });
         }
     }
 }

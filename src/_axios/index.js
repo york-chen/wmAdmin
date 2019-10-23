@@ -28,7 +28,7 @@ axios.interceptors.response.use(
         // status === 401、403, 无登录权限，需登录，跳转登录页面
         if (error.response.status === 401 || error.response.status === 403) {
             Message.error('登录过期，请重新登录');
-            store.commit('login/loginOut');
+            store.dispatch('login/sendLoginout');
         } else if (error.response.status === 404) {
             Message.error('服务器搬家啦')
         } else if (error.response.status === 500) {

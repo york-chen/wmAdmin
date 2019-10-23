@@ -46,11 +46,11 @@ templateMap.set('3','图片模板三');
  **/
 export const btnMap = new Map();
 btnMap.set('all',[
-    {value:'1',text:'限时商城'},
-    {value:'2',text:'传奇商城'},
+    {value:'1',text:'传奇商城'},
+    {value:'2',text:'版本描述'},
     {value:'3',text:'battle pass'},
     {value:'4',text:'邮箱'},
-    {value:'5',text:'版本描述'}
+    {value:'5',text:'限时商城'}
 ]);
 btnMap.set('1','限时商城');
 btnMap.set('2','传奇商城');

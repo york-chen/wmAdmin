@@ -1,20 +1,26 @@
 export default  {
     computed:{
-        _publishTime(){
-            let val = this.form.publishTime;
+        _planPubStartTime(){
+            let val = this.form.planPubStartTime;
             if(!val){
                 return ''
             }else {
                 return `服务器对应的当地时间：${this.$dayjs(val).format('YYYY-MM-DD HH:mm a')}`
             }
         },
-        _stopTime(){
-            let val = this.form.stopTime;
+        _planPubEndTime(){
+            let val = this.form.planPubEndTime;
             if(!val){
                 return ''
             }else {
                 return `服务器对应的当地时间：${this.$dayjs(val).format('YYYY-MM-DD HH:mm a')}`
             }
+        },
+        areaList(){
+            return this.$store.state.common.areaList
+        },
+        languageList(){
+            return this.$store.state.common.languageList
         }
     }
 };

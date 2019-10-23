@@ -8,6 +8,7 @@ import legendMallAd from '@/store/modules/legendMallAd'
 import battlepassMallAd from '@/store/modules/battlepassMallAd'
 import safeguard from '@/store/modules/safeguard'
 import stopService from '@/store/modules/stopService'
+import common from '@/store/modules/common'
 
 Vue.use(Vuex);
 
@@ -20,6 +21,7 @@ export default new Vuex.Store({
         legendMallAd,
         battlepassMallAd,
         safeguard,
-        stopService
+        stopService,
+        common
     }
 })

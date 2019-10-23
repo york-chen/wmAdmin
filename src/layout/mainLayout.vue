@@ -38,10 +38,10 @@
                             <i class="iconfont icon-weihu"></i>
                             <span slot="title">维护预告</span>
                         </el-menu-item>
-                        <el-menu-item index="/stopServiceTips">
-                            <i class="iconfont icon-tingzhi"></i>
-                            <span slot="title">停服提示</span>
-                        </el-menu-item>
+<!--                        <el-menu-item index="/stopServiceTips">-->
+<!--                            <i class="iconfont icon-tingzhi"></i>-->
+<!--                            <span slot="title">停服提示</span>-->
+<!--                        </el-menu-item>-->
                     </el-submenu>
                     <el-submenu index="2">
                         <template slot="title">
@@ -83,7 +83,7 @@
 
 <script>
     import {createNamespacedHelpers} from 'vuex'
-    const {mapState,mapMutations} = createNamespacedHelpers('login');
+    const {mapState,mapActions} = createNamespacedHelpers('login');
     export default {
         name: "adminLayout",
         computed:{
@@ -95,11 +95,11 @@
             }
         },
         methods:{
-            ...mapMutations({
-                loginOut:'loginOut'
+            ...mapActions({
+                sendLoginout:'sendLoginout'
             }),
             _loginOut(){
-                this.loginOut();
+                this.sendLoginout();
             }
         }
     }
