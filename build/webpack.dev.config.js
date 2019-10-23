@@ -155,10 +155,10 @@ module.exports = {
     stats: "errors-only",  // lets you precisely control what bundle information gets displayed
     devServer: {
         proxy: { // proxy URLs to backend development server
-            '/wmApi': {
+            '/api': {
                 target: 'http://dev.zhongcheng.tech:8196',
                 // target: 'http://192.168.10.180:7001'
-                pathRewrite: {'^/wmApi': ''}
+                // pathRewrite: {'^/wmApi': ''}
             }
         },
         port: 5000,

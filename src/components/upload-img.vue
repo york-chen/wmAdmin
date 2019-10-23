@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-upload
-                action="/wmApi/upload"
+                action="/api/upload"
                 list-type="picture-card"
                 multiple
                 :limit="limit"
