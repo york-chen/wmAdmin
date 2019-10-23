@@ -70,7 +70,7 @@ export default {
             this.$emit('change',filelist.map(item=>({imgCode:item._imgCode,url:item._url,_url:item.url})));
         },
         removeFile(file,filelist){
-            this.$emit('change',filelist.map(item=>({imgCode:item._url,url:item._url,_url:item.url})));
+            this.$emit('change',filelist.map(item=>({imgCode:item._imgCode,url:item._url,_url:item.url})));
         }
     }
 }
