@@ -24,7 +24,7 @@
                 <el-table-column prop="submitTime"
                                  label="提交时间">
                 </el-table-column>
-                <el-table-column prop="eventType" label="事件类别">
+                <el-table-column label="事件类别">
                     <template slot-scope="{row}">{{eventTypeMap.get(row.businessType)}}</template>
                 </el-table-column>
                 <el-table-column prop="publisherName" label="发布者">
@@ -35,7 +35,7 @@
                 </el-table-column>
                 <el-table-column prop="planPubEndTime" label="计划结束时间">
                 </el-table-column>
-                <el-table-column prop="status" label="当前状态">
+                <el-table-column label="当前状态">
                     <template slot-scope="{row}">
                         <color-text :type="formatStatusType(row.status)">{{statusMap.get(row.status)}}</color-text>
                     </template>
@@ -104,14 +104,6 @@
             },
             indexMethod(index) {
                 return index +1;
-            },
-            formatStatusType(status){
-                let type = 'primary';
-              switch (status) {
-                  case 'WAIT_AUDIT':type = "primary";break;
-                  case 'WAIT_PUSH':type = "success";break;
-                  case 'REJECT':type = "danger";break;
-              }
             },
             handleEditClick(row){
                 this.openDialog();

@@ -2,7 +2,7 @@
     <div class="page-wrap">
         <SearchPannel>
             <div slot="condition">
-                <el-select v-model="queryParams.status" placeholder="请选择">
+                <el-select @change="queryStatusChange" v-model="queryParams.status" placeholder="请选择">
                     <el-option
                             v-for="item in statusMap.get('all')"
                             :key="item.value"
@@ -16,7 +16,7 @@
             </div>
         </SearchPannel>
         <TableBox v-model="pagination" :action="queryList" class="table">
-            <el-table :data="list">
+            <el-table v-loading="tableLoading" :data="list">
                 <el-table-column label="编号"
                                  type="index"
                                  :index="indexMethod">
@@ -24,17 +24,18 @@
                 <el-table-column prop="submitTime"
                                  label="提交时间">
                 </el-table-column>
-                <el-table-column prop="eventType" label="事件类别">
+                <el-table-column label="事件类别">
+                    <template slot-scope="{row}">{{eventTypeMap.get(row.businessType)}}</template>
                 </el-table-column>
-                <el-table-column prop="creator" label="发布者">
+                <el-table-column prop="publisherName" label="发布者">
                 </el-table-column>
-                <el-table-column prop="area" label="发布区组">
+                <el-table-column prop="publishAreaCode" label="发布区组">
                 </el-table-column>
-                <el-table-column prop="publishTime" label="计划发布时间">
+                <el-table-column prop="planPubStartTime" label="计划发布时间">
                 </el-table-column>
-                <el-table-column prop="endTime" label="计划结束时间">
+                <el-table-column prop="planPubEndTime" label="计划结束时间">
                 </el-table-column>
-                <el-table-column prop="status" label="当前状态">
+                <el-table-column label="当前状态">
                     <template slot-scope="{row}">
                         <color-text :type="formatStatusType(row.status)">{{statusMap.get(row.status)}}</color-text>
                     </template>
@@ -57,19 +58,22 @@
 </template>
 
 <script>
-    import {versionDescStatus} from '@/utils/constents'
+    import {versionDescStatus,eventTypeMap} from '@/utils/constents'
     import TableBox from '@/components/tableBox'
     import SearchPannel from '@/components/search-pannel'
     import colorText from '@/components/color-text'
     import creditOrEdit from './createOrEdit'
+    import triggerSearch from '@/mixins/triggerSearch'
     import {createNamespacedHelpers} from 'vuex'
-    const {mapState} = createNamespacedHelpers('versionDesc');
+    const {mapState,mapActions} = createNamespacedHelpers('versionDesc');
 
     export default {
         name: "versionDesc",
+        mixins:[triggerSearch],
         components:{TableBox,SearchPannel,colorText,creditOrEdit},
         created() {
             this.statusMap = versionDescStatus;
+            this.eventTypeMap = eventTypeMap;
         },
         data(){
             return {
@@ -79,7 +83,8 @@
                     pageSize: 10,
                     total: 0
                 },
-                showDialog:false
+                showDialog:false,
+                tableLoading:false
             }
         },
         computed:{
@@ -88,6 +93,9 @@
             })
         },
         methods:{
+            ...mapActions({
+                sendGetList:'sendGetList'
+            }),
             openDialog(){
                 this.showDialog = true;
             },
@@ -96,14 +104,6 @@
             },
             indexMethod(index) {
                 return index +1;
-            },
-            formatStatusType(status){
-                let type = 'primary';
-                switch (status) {
-                    case '1':type = "primary";break;
-                    case '2':type = "success";break;
-                    case '3':type = "danger";break;
-                }
             },
             handleEditClick(row){
                 this.openDialog();
@@ -127,7 +127,20 @@
             },
             sendAddItem(data){},
             sendEditItem(data){},
-            queryList(){}
+            queryList(){
+                this.tableLoading = true;
+                this.sendGetList({
+                    status:this.queryParams.status,
+                    pageIndex:this.pagination.pageIndex,
+                    pageSize : this.pagination.pageSize
+                }).then(res=>{
+                    this.tableLoading = false;
+                    this.pagination.total = res.total;
+                }).catch(()=>{this.tableLoading = false})
+            }
+        },
+        mounted() {
+            this.queryList();
         }
     }
 </script>
