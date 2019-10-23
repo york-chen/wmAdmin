@@ -116,9 +116,9 @@
                 promise(Promise.all([this.getAreaLanguageData(),this.queryDetail(id)]).then((res)=>{
                     this.openDialog();
                     //处理一下 数据
-                    let data = res[1];
+                    let data = res[1],btns = data.showButton.split(',');
                     data.filelist = data.imgs.map(item=>({imgCode:item.imgCode,url:item.url,_url:null}));
-                    data.btns = data.imgs.map(item=>({imgCode:item.imgCode,url:item.url,_url:null,btn:item.buttonId}));
+                    data.btns = data.imgs.map((item,index)=>({imgCode:item.imgCode,url:item.url,_url:null,btn:btns[index]}));
                     this.$nextTick(()=>{
                         this.$refs['creditOrEdit'].initFormData(data);
                     })
