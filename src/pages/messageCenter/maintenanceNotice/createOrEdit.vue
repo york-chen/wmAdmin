@@ -3,7 +3,7 @@
         <el-form-item prop="content" label="预告内容">
             <el-input type="textarea" :rows="5" v-model="form.content" placeholder="请输入预告内容"></el-input>
         </el-form-item>
-        <el-form-item label="发布区组" prop="area">
+        <el-form-item label="发布区组" required>
             <el-col :span="6">
                 <el-form-item prop="publishAreaCode">
                     <el-select v-model="form.publishAreaCode" placeholder="请选择发布区组">
@@ -86,8 +86,8 @@
                     let planPubEndTime = this.form.planPubEndTime;
                     this.form.planPubStartTime = this.$dayjs(planPubStartTime).format('YYYY-MM-DD HH:mm:ss')
                     this.form.planPubEndTime = this.$dayjs(planPubEndTime).format('YYYY-MM-DD HH:mm:ss')
+                    return this.form;
                 }
-                return flag?this.form:flag;
             }
         }
     }

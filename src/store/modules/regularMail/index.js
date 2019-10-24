@@ -1,4 +1,4 @@
-import {$axGetList,$axCreate,$axEdit,$axQueryDetail} from '@/_axios/api/legendMallAd'
+import {$axGetList,$axCreate,$axEdit,$axQueryDetail} from '@/_axios/api/regularMail'
 export default {
     namespaced: true,
     state: {

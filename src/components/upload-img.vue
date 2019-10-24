@@ -53,7 +53,7 @@ export default {
                 return false
             }
             if (!isLt2M) {
-                this.$message.error('上传图片大小不能超过 2MB!');
+                this.$message.error(`上传图片大小不能超过 ${this.fileSize}MB!`);
                 return false
             }
         },

@@ -192,6 +192,7 @@
 .preview-wrap{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     .preview{
         width: 25%;
         margin-right: 5%;

@@ -102,6 +102,18 @@ regularMailStatus.set('PUSH_FAIL','发布失败');
 regularMailStatus.set('PUSH_SUCC','发布成功');
 
 /**
+ * 常规邮件 发布群体
+ * @type {Map<string, string>}
+ */
+export const publishGroupMap = new Map();
+publishGroupMap.set('all',[
+    {value:'ALL',text:'全服'},
+    {value:'PART',text:'指定用户'},
+]);
+publishGroupMap.set('ALL','全服');
+publishGroupMap.set('PART','指定用户');
+
+/**
  * 维护预告
  * @type {Map<string, string>}
  */
@@ -123,7 +135,7 @@ maintenanceNoticeStatus.set('PUSH_FAIL','发布失败');
 maintenanceNoticeStatus.set('PUSH_SUCC','发布成功');
 
 /**
-* 现实商城广告 状态类型枚举
+* 限时商城广告 状态类型枚举
 * @type {Map<string, string>}
 */
 export const limitedMallAdStatus = new Map();
@@ -142,6 +154,23 @@ limitedMallAdStatus.set('REJECT','已拒绝');
 limitedMallAdStatus.set('PUSHING','发布中');
 limitedMallAdStatus.set('PUSH_FAIL','发布失败');
 limitedMallAdStatus.set('PUSH_SUCC','发布成功');
+
+/**
+* 限时商城广告 广告类型枚举
+* @type {Map<string, string>}
+*/
+export const limitedMallAdTypeMap = new Map();
+limitedMallAdTypeMap.set('all',[
+    {value:'1',text:'广告样式一'},
+    {value:'2',text:'广告样式二'},
+    {value:'3',text:'广告样式三'},
+    {value:'4',text:'广告样式四'}
+]);
+limitedMallAdTypeMap.set('1','广告样式一');
+limitedMallAdTypeMap.set('2','广告样式二');
+limitedMallAdTypeMap.set('3','广告样式三');
+limitedMallAdTypeMap.set('4','广告样式四');
+
 
 /**
  * 传奇商城广告 状态类型枚举
@@ -163,6 +192,39 @@ legendMallAdStatus.set('REJECT','已拒绝');
 legendMallAdStatus.set('PUSHING','发布中');
 legendMallAdStatus.set('PUSH_FAIL','发布失败');
 legendMallAdStatus.set('PUSH_SUCC','发布成功');
+
+/**
+* 传奇商城广告 广告类型枚举
+* @type {Map<string, string>}
+*/
+export const legendMallAdTypeMap = new Map();
+legendMallAdTypeMap.set('all',[
+    {value:'1',text:'广告样式一'},
+    {value:'2',text:'广告样式二'},
+    {value:'3',text:'广告样式三'},
+    {value:'4',text:'广告样式四'}
+]);
+legendMallAdTypeMap.set('1','广告样式一');
+legendMallAdTypeMap.set('2','广告样式二');
+legendMallAdTypeMap.set('3','广告样式三');
+legendMallAdTypeMap.set('4','广告样式四');
+
+
+/**
+* battlepass商城广告 广告类型枚举
+* @type {Map<string, string>}
+*/
+export const battlepassAdTypeMap = new Map();
+battlepassAdTypeMap.set('all',[
+    {value:'1',text:'广告样式一'},
+    {value:'2',text:'广告样式二'},
+    {value:'3',text:'广告样式三'},
+    {value:'4',text:'广告样式四'}
+]);
+battlepassAdTypeMap.set('1','广告样式一');
+battlepassAdTypeMap.set('2','广告样式二');
+battlepassAdTypeMap.set('3','广告样式三');
+battlepassAdTypeMap.set('4','广告样式四');
 
 /**
  * battlepass商城广告 状态类型枚举

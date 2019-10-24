@@ -1,9 +1,24 @@
+import {$axGetList,$axCreate,$axEdit,$axQueryDetail} from '@/_axios/api/limitedMallAd'
 export default {
-namespaced: true,
-state: {
-list:[{submitTime:'2019-10-01 13:51',eventType:'版本描述',creator:'何丽萌',area:'PS4-北美',publishTime:'2019-10-01 13:51',endTime:'2019-10-01 13:51',status:'1'}]
-},
-actions: {
-
-}
+    namespaced: true,
+    state: {
+        list:[]
+    },
+    actions: {
+        sendGetList({state},data){
+            return $axGetList(data).then(res=>{
+                state.list = res.datas;
+                return res
+            })
+        },
+        sendCreate(store,data){
+            return $axCreate(data);
+        },
+        sendEdit(store,data){
+            return $axEdit(data)
+        },
+        sendQueryDetail(store,data){
+            return $axQueryDetail(data)
+        }
+    }
 }

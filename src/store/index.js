@@ -7,6 +7,7 @@ import limitedMallAd from '@/store/modules/limitedMallAd'
 import legendMallAd from '@/store/modules/legendMallAd'
 import battlepassMallAd from '@/store/modules/battlepassMallAd'
 import maintenanceNotice from '@/store/modules/maintenanceNotice'
+import regularMail from '@/store/modules/regularMail'
 import stopService from '@/store/modules/stopService'
 import common from '@/store/modules/common'
 
@@ -22,6 +23,7 @@ export default new Vuex.Store({
         battlepassMallAd,
         maintenanceNotice,
         stopService,
-        common
+        common,
+        regularMail
     }
 })

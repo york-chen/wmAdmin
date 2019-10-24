@@ -2,7 +2,7 @@
     <div>
         <el-upload
                 ref="upload"
-                action="https://jsonplaceholder.typicode.com/posts/"
+                action="/api/upload"
                 :limit="limit"
                 :file-list="filelist"
                 :on-success="uploadSuc"
@@ -38,7 +38,7 @@
                     this.$message.error('文件格式不正确!');
                 }
                 if (!isLt2M) {
-                    this.$message.error('上传文件大小不能超过 2MB!');
+                    this.$message.error(`上传文件大小不能超过 ${this.fileSize}MB!`);
                 }
                 return valid && isLt2M;
             },
@@ -46,10 +46,16 @@
                 this.$message.warning(`当前限制选择 ${this.limit} 个文件，本次选择了 ${files.length} 个文件。`);
             },
             uploadSuc(response,file,filelist){
-                this.$emit('change',this.filelist);
+                filelist.forEach(item=>{
+                if(item.uid === file.uid){
+                    item.imgCode = response.imgCode;
+                    item._url = response.url;
+                }
+            });
+            this.$emit('change',filelist.map(item=>({imgCode:item.imgCode,url:item._url,_url:item.url})));
             },
             removeFile(file,filelist){
-                this.$emit('change',filelist);
+                this.$emit('change',filelist.map(item=>({imgCode:item.imgCode,url:item._url,_url:item.url})));
             }
         }
     }
