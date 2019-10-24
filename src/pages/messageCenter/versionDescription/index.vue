@@ -33,8 +33,6 @@
                 </el-table-column>
                 <el-table-column prop="planPubStartTime" label="计划发布时间">
                 </el-table-column>
-                <el-table-column prop="planPubEndTime" label="计划结束时间">
-                </el-table-column>
                 <el-table-column label="当前状态">
                     <template slot-scope="{row}">
                         <color-text :type="formatStatusType(row.status)">{{statusMap.get(row.status)}}</color-text>
@@ -105,9 +103,6 @@
             },
             closeDialog(){
                 this.showDialog = false
-            },
-            indexMethod(index) {
-                return index +1;
             },
             queryDetail(id){
                 return this.sendQueryDetail({businessId:id})

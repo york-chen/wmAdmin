@@ -13,6 +13,9 @@ export default {
         },
         getAreaLanguageData(){
             return Promise.all([this.$store.dispatch('common/sendGetAreas'),this.$store.dispatch('common/sendGetLanguages')])
+        },
+        indexMethod(index) {
+            return index +1;
         }
     }
 }

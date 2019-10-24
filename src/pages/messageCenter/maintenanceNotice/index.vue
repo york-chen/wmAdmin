@@ -2,7 +2,7 @@
     <div class="page-wrap">
         <SearchPannel>
             <div slot="condition">
-                <el-select v-model="queryParams.status" placeholder="请选择">
+                <el-select @change="queryStatusChange" v-model="queryParams.status" placeholder="请选择">
                     <el-option
                             v-for="item in statusMap.get('all')"
                             :key="item.value"
@@ -12,26 +12,37 @@
                 </el-select>
             </div>
             <div slot="operation">
-                <el-button @click="handleAddClick" type="primary">新增</el-button>
+                <asyncButton label="新增" @_click="handleAddClick" type="primary" exec_label="加载中"></asyncButton>
             </div>
         </SearchPannel>
         <TableBox v-model="pagination" :action="queryList" class="table">
-            <el-table :data="list">
-                <el-table-column label="编号" type="index"></el-table-column>
-                <el-table-column prop="submitTime" label="提交时间"></el-table-column>
-                <el-table-column prop="eventType" label="事件类别"></el-table-column>
-                <el-table-column prop="creator" label="发布者"></el-table-column>
-                <el-table-column prop="area" label="发布区组"></el-table-column>
-                <el-table-column prop="publishTime" label="计划发布时间"></el-table-column>
-                <el-table-column prop="endTime" label="计划结束时间"></el-table-column>
-                <el-table-column prop="status" label="当前状态">
+            <el-table v-loading="tableLoading" :data="list">
+                <el-table-column label="编号"
+                                 type="index"
+                                 :index="indexMethod">
+                </el-table-column>
+                <el-table-column prop="submitTime"
+                                 label="提交时间">
+                </el-table-column>
+                <el-table-column label="事件类别">
+                    <template slot-scope="{row}">{{eventTypeMap.get(row.businessType)}}</template>
+                </el-table-column>
+                <el-table-column prop="publisherName" label="发布者">
+                </el-table-column>
+                <el-table-column prop="publishAreaCode" label="发布区组">
+                </el-table-column>
+                <el-table-column prop="planPubStartTime" label="计划发布时间">
+                </el-table-column>
+                <el-table-column prop="planPubEndTime" label="计划结束时间">
+                </el-table-column>
+                <el-table-column label="当前状态">
                     <template slot-scope="{row}">
                         <color-text :type="formatStatusType(row.status)">{{statusMap.get(row.status)}}</color-text>
                     </template>
                 </el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="{row}">
-                        <el-button @click="handleEditClick(row)" type="text">修改</el-button>
+                        <asyncButton size="mini" label="修改" @_click="handleEditClick" :arguments="row.businessId" type="primary"></asyncButton>
                     </template>
                 </el-table-column>
             </el-table>
@@ -40,26 +51,30 @@
             <credit-or-edit v-if="showDialog" ref="creditOrEdit"></credit-or-edit>
             <span slot="footer" class="dialog-footer">
             <el-button @click="closeDialog">取 消</el-button>
-            <el-button type="primary" @click="submitForm">提交审核</el-button>
+            <asyncButton label="提交审核" @_click="submitForm" type="primary" exec_label="正在提交"></asyncButton>
           </span>
         </el-dialog>
     </div>
 </template>
 
 <script>
-    import {safeguardStatus} from '@/utils/constents'
+    import {maintenanceNoticeStatus,eventTypeMap} from '@/utils/constents'
     import TableBox from '@/components/tableBox'
     import SearchPannel from '@/components/search-pannel'
     import colorText from '@/components/color-text'
     import creditOrEdit from './createOrEdit'
+    import asyncButton from '@/components/asyncButton'
+    import triggerSearch from '@/mixins/triggerSearch'
     import {createNamespacedHelpers} from 'vuex'
-    const {mapState} = createNamespacedHelpers('safeguard');
+    const {mapState,mapActions} = createNamespacedHelpers('maintenanceNotice');
 
     export default {
         name: "safeguard",
-        components:{TableBox,SearchPannel,colorText,creditOrEdit},
+        mixins:[triggerSearch],
+        components:{TableBox,SearchPannel,colorText,creditOrEdit,asyncButton},
         created() {
-            this.statusMap = safeguardStatus;
+            this.statusMap = maintenanceNoticeStatus;
+            this.eventTypeMap = eventTypeMap;
         },
         data(){
             return {
@@ -69,7 +84,8 @@
                     pageSize: 10,
                     total: 0
                 },
-                showDialog:false
+                showDialog:false,
+                tableLoading:false
             }
         },
         computed:{
@@ -78,43 +94,74 @@
             })
         },
         methods:{
+            ...mapActions({
+                sendGetList:'sendGetList',
+                sendCreate:'sendCreate',
+                sendEdit:'sendEdit',
+                sendQueryDetail:'sendQueryDetail'
+            }),
             openDialog(){
                 this.showDialog = true;
             },
             closeDialog(){
                 this.showDialog = false
             },
-            formatStatusType(status){
-                let type = 'primary';
-                switch (status) {
-                    case '1':type = "primary";break;
-                    case '2':type = "success";break;
-                    case '3':type = "danger";break;
-                }
+            queryDetail(id){
+                return this.sendQueryDetail({businessId:id})
             },
-            handleEditClick(row){
-                this.openDialog();
-                this.$nextTick(()=>{
-                    this.$refs['creditOrEdit'].initFormData(row);
-                })
+            handleEditClick(promise,id){
+                promise(Promise.all([this.getAreaLanguageData(),this.queryDetail(id)]).then((res)=>{
+                    this.openDialog();
+                    this.$nextTick(()=>{
+                        this.$refs['creditOrEdit'].initFormData(res[1]);
+                    })
+                }));
             },
-            handleAddClick(){
-                this.openDialog();
+            handleAddClick(promise){
+                promise(this.getAreaLanguageData().then(()=>{
+                    this.openDialog();
+                }))
             },
-            submitForm(){
+            submitForm(promise){
                 let data = this.$refs['creditOrEdit'].getData();
                 console.log(data);
                 if(data){
-                    if(data.id){//编辑
-                        this.sendEditItem(data);
+                    if(data.businessId){//编辑
+                        promise(this.sendEditItem(data));
                     }else {//新增
-                        this.sendAddItem(data);
+                        promise(this.sendAddItem(data));
                     }
                 }
             },
-            sendAddItem(data){},
-            sendEditItem(data){},
-            queryList(){}
+            sendAddItem(data){
+                return this.sendCreate(data).then(()=>{
+                    this.$message.success('操作成功！')
+                    this.closeDialog();
+                    this.queryList();
+                })
+            },
+            sendEditItem(data){
+                return this.sendEdit(data).then(()=>{
+                    this.$message.success('操作成功！')
+                    this.closeDialog();
+                    this.pagination.pageIndex = 1;
+                    this.queryList();
+                })
+            },
+            queryList(){
+                this.tableLoading = true;
+                this.sendGetList({
+                    status:this.queryParams.status,
+                    pageIndex:this.pagination.pageIndex,
+                    pageSize : this.pagination.pageSize
+                }).then(res=>{
+                    this.tableLoading = false;
+                    this.pagination.total = res.total;
+                }).catch(()=>{this.tableLoading = false})
+            }
+        },
+        mounted(){
+            this.queryList();
         }
     }
 </script>

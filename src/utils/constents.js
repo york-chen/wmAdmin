@@ -105,8 +105,8 @@ regularMailStatus.set('PUSH_SUCC','发布成功');
  * 维护预告
  * @type {Map<string, string>}
  */
-export const safeguardStatus = new Map();
-safeguardStatus.set('all',[
+export const maintenanceNoticeStatus = new Map();
+maintenanceNoticeStatus.set('all',[
     {value:'',text:'全部'},
     {value:'WAIT_AUDIT',text:'待审核'},
     {value:'WAIT_PUSH',text:'待发布'},
@@ -115,12 +115,12 @@ safeguardStatus.set('all',[
     {value:'PUSH_FAIL',text:'发布失败'},
     {value:'PUSH_SUCC',text:'发布成功'},
 ]);
-safeguardStatus.set('WAIT_AUDIT','待审核');
-safeguardStatus.set('WAIT_PUSH','待发布');
-safeguardStatus.set('REJECT','已拒绝');
-safeguardStatus.set('PUSHING','发布中');
-safeguardStatus.set('PUSH_FAIL','发布失败');
-safeguardStatus.set('PUSH_SUCC','发布成功');
+maintenanceNoticeStatus.set('WAIT_AUDIT','待审核');
+maintenanceNoticeStatus.set('WAIT_PUSH','待发布');
+maintenanceNoticeStatus.set('REJECT','已拒绝');
+maintenanceNoticeStatus.set('PUSHING','发布中');
+maintenanceNoticeStatus.set('PUSH_FAIL','发布失败');
+maintenanceNoticeStatus.set('PUSH_SUCC','发布成功');
 
 /**
 * 现实商城广告 状态类型枚举

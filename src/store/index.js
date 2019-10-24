@@ -6,7 +6,7 @@ import versionDesc from '@/store/modules/versionDescription'
 import limitedMallAd from '@/store/modules/limitedMallAd'
 import legendMallAd from '@/store/modules/legendMallAd'
 import battlepassMallAd from '@/store/modules/battlepassMallAd'
-import safeguard from '@/store/modules/safeguard'
+import maintenanceNotice from '@/store/modules/maintenanceNotice'
 import stopService from '@/store/modules/stopService'
 import common from '@/store/modules/common'
 
@@ -20,7 +20,7 @@ export default new Vuex.Store({
         limitedMallAd,
         legendMallAd,
         battlepassMallAd,
-        safeguard,
+        maintenanceNotice,
         stopService,
         common
     }

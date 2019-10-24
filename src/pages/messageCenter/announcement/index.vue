@@ -106,9 +106,6 @@
             closeDialog(){
               this.showDialog = false
             },
-            indexMethod(index) {
-                return index +1;
-            },
             queryDetail(id){
                 return this.sendQueryAnnouncement({businessId:id})
             },
