@@ -58,7 +58,7 @@
 </template>
 
 <script>
-    import {legendMallAdTypeMap,eventTypeMap} from '@/utils/constents'
+    import {legendMallAdStatus,eventTypeMap} from '@/utils/constents'
     import TableBox from '@/components/tableBox'
     import SearchPannel from '@/components/search-pannel'
     import colorText from '@/components/color-text'
@@ -73,7 +73,7 @@
         mixins:[triggerSearch],
         components:{TableBox,SearchPannel,colorText,creditOrEdit,asyncButton},
         created() {
-            this.statusMap = legendMallAdTypeMap;
+            this.statusMap = legendMallAdStatus;
             this.eventTypeMap = eventTypeMap;
         },
         data(){

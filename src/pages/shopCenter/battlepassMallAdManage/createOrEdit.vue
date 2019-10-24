@@ -2,7 +2,7 @@
     <el-form :model="form" :rules="rules" ref="form" label-width="80px" class="form-wrap">
         <el-form-item label="广告选择" prop="styleType">
             <el-select v-model="form.styleType" placeholder="请选择公告模板">
-                <el-option v-for="item in limitedMallAdTypeMap.get('all')" :key="item.value" :label="item.text" :value="item.value"></el-option>
+                <el-option v-for="item in battlepassAdTypeMap.get('all')" :key="item.value" :label="item.text" :value="item.value"></el-option>
             </el-select>
         </el-form-item>
         <el-form-item label="图片上传" prop="filelist">
@@ -38,7 +38,7 @@
     import uploadFile from '@/components/upload-img'
     import areaMixin from '@/mixins/area-group'
     import colorText from '@/components/color-text'
-    import {limitedMallAdTypeMap} from '@/utils/constents'
+    import {battlepassAdTypeMap} from '@/utils/constents'
     export default {
         components:{uploadFile,colorText},
         mixins:[areaMixin],
@@ -49,7 +49,7 @@
                 languageCode: [{required: true, message: '请选择语言代号', trigger: 'change'}],
                 filelist: [{required: true, message: '请上传图片', trigger: 'change'}],
             };
-            this.limitedMallAdTypeMap = limitedMallAdTypeMap;
+            this.battlepassAdTypeMap = battlepassAdTypeMap;
         },
         data(){
             return{
