@@ -5,7 +5,7 @@
                 <el-option v-for="item in limitedMallAdTypeMap.get('all')" :key="item.value" :label="item.text" :value="item.value"></el-option>
             </el-select>
         </el-form-item>
-        <el-form-item label="图片上传" prop="filelist">
+        <el-form-item v-if="showUpload" label="图片上传" prop="filelist">
             <upload-file :limit="10" v-model="form.filelist"></upload-file>
         </el-form-item>
         <el-form-item v-if="form.filelist.length" label="图片预览">
@@ -58,7 +58,8 @@
                     publishAreaCode:'',
                     languageCode:'',
                     filelist:[]
-                }
+                },
+                showUpload:true
             }
         },
         methods:{
@@ -67,6 +68,11 @@
                     ...this.form,
                     ...data
                 }
+                ///为了解决缩略图不显示的问题 后面优化
+            this.showUpload = false;
+            this.$nextTick(()=>{
+                this.showUpload = true;
+            })
             },
             getData(){
                 let flag = false;
@@ -77,7 +83,7 @@
                     return flag
                 }else{
                     let _form = JSON.parse(JSON.stringify(this.form));
-                    _form.imgCodes = _form.filelist.map(item=>item.imgCode);
+                    _form.imgCodes = _form.filelist.map(item=>item.imgCode).join(',');
                     delete _form.filelist;
                     return _form
                 }

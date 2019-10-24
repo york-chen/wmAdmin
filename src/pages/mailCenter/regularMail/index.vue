@@ -114,7 +114,6 @@
                     this.openDialog();
                     this.$nextTick(()=>{
                         let data = res[1];
-                        console.log(res[1]);
                         data.prop = JSON.parse(data.prop);
                         if(data.assginUserIds === 'ALL'){
                             data.publishGroup = 'ALL';

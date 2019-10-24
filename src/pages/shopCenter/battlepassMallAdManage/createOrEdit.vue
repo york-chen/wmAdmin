@@ -77,7 +77,7 @@
                     return flag
                 }else{
                     let _form = JSON.parse(JSON.stringify(this.form));
-                    _form.imgCodes = _form.filelist.map(item=>item.imgCode);
+                    _form.imgCodes = _form.filelist.map(item=>item.imgCode).join(',');
                     delete _form.filelist;
                     return _form
                 }
