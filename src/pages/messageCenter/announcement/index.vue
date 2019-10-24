@@ -131,7 +131,6 @@
             },
             submitForm(promise){
               let data = this.$refs['creditOrEdit'].getData();
-              console.log(data);
               if(data){
                 if(data.businessId){//编辑
                     promise(this.sendEditItem(data));
@@ -148,7 +147,13 @@
                     this.queryList();
                 })
             },
-            sendEditItem(data){},
+            sendEditItem(data){
+                return this.sendEditAnnouncement(data).then(()=>{
+                    this.$message.success('操作成功！');
+                    this.closeDialog();
+                    this.queryList();
+                })
+            },
             queryList(){
                 this.tableLoading = true;
                 this.sendGetList({

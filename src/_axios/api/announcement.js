@@ -20,7 +20,10 @@ export const $axCreateAnnouncement = params => {
 export const $axEditAnnouncement = params => {
     return axios({
         method: 'post',
-        url: '/notice/update'
+        url: '/notice/update',
+        headers:{
+            'Content-Type':'application/json'
+        }
     }, params)
 };
 

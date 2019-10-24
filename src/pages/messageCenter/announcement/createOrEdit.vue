@@ -148,6 +148,8 @@
                     form.planPubEndTime = this.$dayjs(form.planPubEndTime).format('YYYY-MM-DD HH:mm:ss');
                     if(form.eventType === 'NOTICE_WORD'){
                         data = {
+                            id:form.id,
+                            businessId:form.businessId,
                             "eventType":form.eventType,
                             "title":form.title,
                             "content":form.content,
@@ -158,6 +160,8 @@
                         }
                     }else{
                         data = {
+                            id:form.id,
+                            businessId:form.businessId,
                             "eventType":form.eventType,
                             "styleType":form.styleType,
                             "publishAreaCode":form.publishAreaCode,

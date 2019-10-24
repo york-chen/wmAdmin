@@ -4,3 +4,5 @@ vendor2-manifest.json
 vendor3-manifest.json
 vendor4-manifest.json
 vendor5-manifest.json
+.idea/*
+dist/*

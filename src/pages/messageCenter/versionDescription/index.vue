@@ -12,7 +12,7 @@
                 </el-select>
             </div>
             <div slot="operation">
-                <el-button @click="handleAddClick" type="primary">新增</el-button>
+                <asyncButton label="新增" @_click="handleAddClick" type="primary" exec_label="加载中"></asyncButton>
             </div>
         </SearchPannel>
         <TableBox v-model="pagination" :action="queryList" class="table">
@@ -42,7 +42,7 @@
                 </el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="{row}">
-                        <el-button @click="handleEditClick(row)" type="text">修改</el-button>
+                        <asyncButton size="mini" label="修改" @_click="handleEditClick" :arguments="row.businessId" type="primary"></asyncButton>
                     </template>
                 </el-table-column>
             </el-table>
@@ -51,7 +51,7 @@
             <credit-or-edit v-if="showDialog" ref="creditOrEdit"></credit-or-edit>
             <span slot="footer" class="dialog-footer">
             <el-button @click="closeDialog">取 消</el-button>
-            <el-button type="primary" @click="submitForm">提交审核</el-button>
+            <asyncButton label="提交审核" @_click="submitForm" type="primary" exec_label="正在提交"></asyncButton>
           </span>
         </el-dialog>
     </div>
@@ -62,6 +62,7 @@
     import TableBox from '@/components/tableBox'
     import SearchPannel from '@/components/search-pannel'
     import colorText from '@/components/color-text'
+    import asyncButton from '@/components/asyncButton'
     import creditOrEdit from './createOrEdit'
     import triggerSearch from '@/mixins/triggerSearch'
     import {createNamespacedHelpers} from 'vuex'
@@ -70,7 +71,7 @@
     export default {
         name: "versionDesc",
         mixins:[triggerSearch],
-        components:{TableBox,SearchPannel,colorText,creditOrEdit},
+        components:{TableBox,SearchPannel,colorText,creditOrEdit,asyncButton},
         created() {
             this.statusMap = versionDescStatus;
             this.eventTypeMap = eventTypeMap;
@@ -94,7 +95,10 @@
         },
         methods:{
             ...mapActions({
-                sendGetList:'sendGetList'
+                sendGetList:'sendGetList',
+                sendCreate:'sendCreate',
+                sendEdit:'sendEdit',
+                sendQueryDetail:'sendQueryDetail'
             }),
             openDialog(){
                 this.showDialog = true;
@@ -105,28 +109,48 @@
             indexMethod(index) {
                 return index +1;
             },
-            handleEditClick(row){
-                this.openDialog();
-                this.$nextTick(()=>{
-                    this.$refs['creditOrEdit'].initFormData(row);
-                })
+            queryDetail(id){
+                return this.sendQueryDetail({businessId:id})
             },
-            handleAddClick(){
-                this.openDialog();
+            handleEditClick(promise,id){
+                promise(Promise.all([this.getAreaLanguageData(),this.queryDetail(id)]).then((res)=>{
+                    this.openDialog();
+                    this.$nextTick(()=>{
+                        this.$refs['creditOrEdit'].initFormData(res[1]);
+                    })
+                }));
             },
-            submitForm(){
+            handleAddClick(promise){
+                promise(this.getAreaLanguageData().then(()=>{
+                    this.openDialog();
+                }))
+            },
+            submitForm(promise){
                 let data = this.$refs['creditOrEdit'].getData();
                 console.log(data);
                 if(data){
-                    if(data.id){//编辑
-                        this.sendEditItem(data);
+                    if(data.businessId){//编辑
+                        promise(this.sendEditItem(data));
                     }else {//新增
-                        this.sendAddItem(data);
+                        promise(this.sendAddItem(data));
                     }
                 }
             },
-            sendAddItem(data){},
-            sendEditItem(data){},
+            sendAddItem(data){
+                return this.sendCreate(data).then(()=>{
+                    this.$message.success('操作成功！')
+                    this.closeDialog();
+                    this.queryList();
+                })
+            },
+            sendEditItem(data){
+                return this.sendEdit(data).then(()=>{
+                    this.$message.success('操作成功！')
+                    this.closeDialog();
+                    this.pagination.pageIndex = 1;
+                    this.queryList();
+                })
+            },
             queryList(){
                 this.tableLoading = true;
                 this.sendGetList({
