@@ -113,7 +113,17 @@
                 promise(Promise.all([this.getAreaLanguageData(),this.queryDetail(id)]).then((res)=>{
                     this.openDialog();
                     this.$nextTick(()=>{
-                        this.$refs['creditOrEdit'].initFormData(res[1]);
+                        let data = res[1];
+                        console.log(res[1]);
+                        data.prop = JSON.parse(data.prop);
+                        if(data.assginUserIds === 'ALL'){
+                            data.publishGroup = 'ALL';
+                            data.userids = [];
+                        }else{
+                            data.publishGroup = 'PART'
+                            data.userids = [{imgCode:data.assginUserIds.split(':')[1],url:''}]
+                        }
+                        this.$refs['creditOrEdit'].initFormData(data);
                     })
                 }));
             },
@@ -124,7 +134,6 @@
             },
             submitForm(promise){
                 let data = this.$refs['creditOrEdit'].getData();
-                console.log(data);
                 if(data){
                     if(data.businessId){//编辑
                         promise(this.sendEditItem(data));

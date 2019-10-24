@@ -118,12 +118,13 @@
                     return flag;
                 }else{
                     let _form = JSON.parse(JSON.stringify(this.form))
-                    console.log(_form)
                     if(_form.publishGroup === 'ALL'){
                         _form.assginUserIds = 'ALL';
                     }else{
                         _form.assginUserIds = `PART:${_form.userids[0].imgCode}`;
                     }
+                    _form.prop = JSON.stringify(_form.prop);
+                    _form.planPubStartTime = this.$dayjs(_form.planPubStartTime).format('YYYY-MM-DD HH:mm:ss');
                     delete _form.userids;
                     delete _form.publishGroup;
                     return _form
