@@ -112,8 +112,10 @@
             handleEditClick(promise,id){
                 promise(Promise.all([this.getAreaLanguageData(),this.queryDetail(id)]).then((res)=>{
                     this.openDialog();
+                    let data = res[1];
+                    data.filelist = data.imgs.map(item=>({imgCode:item.imgCode,url:item.url,_url:item.url}));
                     this.$nextTick(()=>{
-                        this.$refs['creditOrEdit'].initFormData(res[1]);
+                        this.$refs['creditOrEdit'].initFormData(data);
                     })
                 }));
             },
