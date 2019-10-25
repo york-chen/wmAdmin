@@ -5,7 +5,7 @@
                 <el-option v-for="item in battlepassAdTypeMap.get('all')" :key="item.value" :label="item.text" :value="item.value"></el-option>
             </el-select>
         </el-form-item>
-        <el-form-item v-if="!disabled" label="图片上传" prop="filelist">
+        <el-form-item v-if="showUpload&&!disabled" label="图片上传" prop="filelist">
             <upload-file :limit="10" v-model="form.filelist"></upload-file>
         </el-form-item>
         <el-form-item v-if="form.filelist.length" label="图片预览">
