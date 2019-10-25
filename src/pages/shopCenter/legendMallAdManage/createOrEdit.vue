@@ -1,11 +1,11 @@
 <template>
     <el-form :model="form" :rules="rules" ref="form" label-width="80px" class="form-wrap">
         <el-form-item label="广告选择" prop="styleType">
-            <el-select v-model="form.styleType" placeholder="请选择公告模板">
+            <el-select :disabled="disabled" v-model="form.styleType" placeholder="请选择公告模板">
                 <el-option v-for="item in legendMallAdTypeMap.get('all')" :key="item.value" :label="item.text" :value="item.value"></el-option>
             </el-select>
         </el-form-item>
-        <el-form-item label="图片上传" prop="filelist">
+        <el-form-item v-if="!disabled" label="图片上传" prop="filelist">
             <upload-file :limit="10" v-model="form.filelist"></upload-file>
         </el-form-item>
         <el-form-item v-if="form.filelist.length" label="图片预览">
@@ -18,14 +18,14 @@
         <el-form-item label="发布区组" required>
             <el-col :span="6">
                 <el-form-item prop="publishAreaCode">
-                    <el-select v-model="form.publishAreaCode" placeholder="请选择发布区组">
+                    <el-select :disabled="disabled" v-model="form.publishAreaCode" placeholder="请选择发布区组">
                         <el-option v-for="(item,index) in areaList" :key="index" :label="item.areaName" :value="item.areaCode"></el-option>
                     </el-select>
                 </el-form-item>
             </el-col>
             <el-col :span="6">
                 <el-form-item prop="languageCode">
-                    <el-select v-model="form.languageCode" placeholder="请选择语言包">
+                    <el-select :disabled="disabled" v-model="form.languageCode" placeholder="请选择语言包">
                         <el-option v-for="(item,index) in languageList" :key="index" :label="item.langName" :value="item.langCode"></el-option>
                     </el-select>
                 </el-form-item>
@@ -58,7 +58,8 @@
                     publishAreaCode:'',
                     languageCode:'',
                     filelist:[]
-                }
+                },
+                showUpload:true
             }
         },
         methods:{
@@ -66,7 +67,12 @@
                 this.form = {
                     ...this.form,
                     ...data
-                }
+                };
+                ///为了解决缩略图不显示的问题 后面优化
+                this.showUpload = false;
+                this.$nextTick(()=>{
+                    this.showUpload = true;
+                })
             },
             getData(){
                 let flag = false;

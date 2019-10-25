@@ -42,17 +42,34 @@
                 </el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="{row}">
-                        <asyncButton size="mini" label="修改" @_click="handleEditClick" :arguments="row.businessId" type="primary"></asyncButton>
+                        <asyncButton size="mini" label="查看" @_click="handleViewClick" :arguments="row" type="primary"></asyncButton>
+                        <asyncButton v-if="row.status==='DRAFT'||row.status==='REJECT'" size="mini" label="修改" @_click="handleEditClick" :arguments="row.businessId" type="primary"></asyncButton>
                     </template>
                 </el-table-column>
             </el-table>
         </TableBox>
         <el-dialog center :visible.sync="showDialog">
-            <credit-or-edit v-if="showDialog" ref="creditOrEdit"></credit-or-edit>
+            <credit-or-edit :operateType=operateType v-if="showDialog" ref="creditOrEdit"></credit-or-edit>
             <span slot="footer" class="dialog-footer">
-            <el-button @click="closeDialog">取 消</el-button>
-            <asyncButton label="提交审核" @_click="submitForm" type="primary" exec_label="正在提交"></asyncButton>
-          </span>
+                <template v-if="btnStatus._showSave">
+                    <asyncButton  label="保存" @_click="submitForm" type="primary" exec_label="保存中"></asyncButton>
+                </template>
+                <template v-if="btnStatus._showApproval">
+                    <asyncButton  label="提交审核" @_click="submitApproval" type="primary" exec_label="正在提交"></asyncButton>
+                </template>
+                <template v-if="btnStatus._showPublish">
+                    <asyncButton  label="发布" @_click="publishAction" type="primary" exec_label="发布中"></asyncButton>
+                </template>
+                <template v-if="btnStatus._showCancel">
+                    <asyncButton  label="撤回" @_click="cancelAction" type="primary" exec_label="撤回中"></asyncButton>
+                </template>
+                <template v-if="btnStatus._showRepublish">
+                    <asyncButton  label="重新发布" @_click="republishAction" type="primary" exec_label="发布中"></asyncButton>
+                </template>
+                <template v-if="btnStatus._showDelay">
+                    <asyncButton  label="延迟发布" @_click="delayAction" type="primary" exec_label="提交中"></asyncButton>
+                </template>
+            </span>
         </el-dialog>
     </div>
 </template>
@@ -75,6 +92,7 @@
         created() {
             this.statusMap = maintenanceNoticeStatus;
             this.eventTypeMap = eventTypeMap;
+            this.viewData = {}//当弹出框模式为查看的时候的json数据
         },
         data(){
             return {
@@ -85,7 +103,8 @@
                     total: 0
                 },
                 showDialog:false,
-                tableLoading:false
+                tableLoading:false,
+                operateType:'operateType'
             }
         },
         computed:{
@@ -109,7 +128,12 @@
             queryDetail(id){
                 return this.sendQueryDetail({businessId:id})
             },
-            handleEditClick(promise,id){
+            handleViewClick(promise,row){
+                this.operateType = 'view';
+                this.viewData = row;
+                this.readyForData(promise,row.businessId);
+            },
+            readyForData(promise,id){
                 promise(Promise.all([this.getAreaLanguageData(),this.queryDetail(id)]).then((res)=>{
                     this.openDialog();
                     this.$nextTick(()=>{
@@ -117,7 +141,12 @@
                     })
                 }));
             },
+            handleEditClick(promise,id){
+                this.operateType = 'edit';
+                this.readyForData(promise,id);
+            },
             handleAddClick(promise){
+                this.operateType = 'add';
                 promise(this.getAreaLanguageData().then(()=>{
                     this.openDialog();
                 }))

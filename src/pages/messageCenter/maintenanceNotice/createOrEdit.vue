@@ -1,19 +1,19 @@
 <template>
     <el-form :model="form" :rules="rules" ref="form" class="form-wrap" label-width="85px">
         <el-form-item prop="content" label="预告内容">
-            <el-input type="textarea" :rows="5" v-model="form.content" placeholder="请输入预告内容"></el-input>
+            <el-input :disabled="disabled" type="textarea" :rows="5" v-model="form.content" placeholder="请输入预告内容"></el-input>
         </el-form-item>
         <el-form-item label="发布区组" required>
             <el-col :span="6">
                 <el-form-item prop="publishAreaCode">
-                    <el-select v-model="form.publishAreaCode" placeholder="请选择发布区组">
+                    <el-select :disabled="disabled" v-model="form.publishAreaCode" placeholder="请选择发布区组">
                         <el-option v-for="(item,index) in areaList" :key="index" :label="item.areaName" :value="item.areaCode"></el-option>
                     </el-select>
                 </el-form-item>
             </el-col>
             <el-col :span="6">
                 <el-form-item prop="languageCode">
-                    <el-select v-model="form.languageCode" placeholder="请选择语言包">
+                    <el-select :disabled="disabled" v-model="form.languageCode" placeholder="请选择语言包">
                         <el-option v-for="(item,index) in languageList" :key="index" :label="item.langName" :value="item.langCode"></el-option>
                     </el-select>
                 </el-form-item>
@@ -21,7 +21,7 @@
             <color-text type="warning">提示：请注意图片或文字是否与选择服务器一致</color-text>
         </el-form-item>
         <el-form-item label="定时发布" prop="planPubStartTime">
-            <el-date-picker
+            <el-date-picker :disabled="disabled"
                     v-model="form.planPubStartTime"
                     type="datetime"
                     placeholder="选择定时发布时间">
@@ -29,7 +29,7 @@
             {{_planPubStartTime}}
         </el-form-item>
         <el-form-item label="定时关闭" prop="planPubEndTime">
-            <el-date-picker
+            <el-date-picker :disabled="disabled"
                     v-model="form.planPubEndTime"
                     type="datetime"
                     placeholder="选择定时关闭时间">

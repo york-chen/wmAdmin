@@ -1,4 +1,7 @@
 export default  {
+    props:{
+        operateType:{type:String,default:'add'}
+    },
     computed:{
         _planPubStartTime(){
             let val = this.form.planPubStartTime;
@@ -21,6 +24,14 @@ export default  {
         },
         languageList(){
             return this.$store.state.common.languageList
+        },
+        disabled(){
+            let operateType = this.operateType;
+            if(operateType === 'view'){
+                return true
+            }else{
+                return false
+            }
         }
     }
 };

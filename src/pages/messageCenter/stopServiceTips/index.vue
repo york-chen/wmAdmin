@@ -39,9 +39,25 @@
         <el-dialog center :visible.sync="showDialog">
             <credit-or-edit v-if="showDialog" ref="creditOrEdit"></credit-or-edit>
             <span slot="footer" class="dialog-footer">
-            <el-button @click="closeDialog">取 消</el-button>
-            <el-button type="primary" @click="submitForm">提交审核</el-button>
-          </span>
+                <template v-if="btnStatus._showSave">
+                    <asyncButton  label="保存" @_click="submitForm" type="primary" exec_label="保存中"></asyncButton>
+                </template>
+                <template v-if="btnStatus._showApproval">
+                    <asyncButton  label="提交审核" @_click="submitApproval" type="primary" exec_label="正在提交"></asyncButton>
+                </template>
+                <template v-if="btnStatus._showPublish">
+                    <asyncButton  label="发布" @_click="publishAction" type="primary" exec_label="发布中"></asyncButton>
+                </template>
+                <template v-if="btnStatus._showCancel">
+                    <asyncButton  label="撤回" @_click="cancelAction" type="primary" exec_label="撤回中"></asyncButton>
+                </template>
+                <template v-if="btnStatus._showRepublish">
+                    <asyncButton  label="重新发布" @_click="republishAction" type="primary" exec_label="发布中"></asyncButton>
+                </template>
+                <template v-if="btnStatus._showDelay">
+                    <asyncButton  label="延迟发布" @_click="delayAction" type="primary" exec_label="提交中"></asyncButton>
+                </template>
+            </span>
         </el-dialog>
     </div>
 </template>
@@ -60,6 +76,7 @@
         components:{TableBox,SearchPannel,colorText,creditOrEdit},
         created() {
             this.statusMap = stopServiceStatus;
+            this.viewData = {}//当弹出框模式为查看的时候的json数据
         },
         data(){
             return {

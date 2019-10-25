@@ -6,6 +6,7 @@
 export const announcementStatus = new Map();
 announcementStatus.set('all',[
     {value:'',text:'全部'},
+    {value:'DRAFT',text:'可编辑'},
     {value:'WAIT_AUDIT',text:'待审核'},
     {value:'WAIT_PUSH',text:'待发布'},
     {value:'REJECT',text:'已拒绝'},
@@ -13,6 +14,7 @@ announcementStatus.set('all',[
     {value:'PUSH_FAIL',text:'发布失败'},
     {value:'PUSH_SUCC',text:'发布成功'},
 ]);
+announcementStatus.set('DRAFT','可编辑');
 announcementStatus.set('WAIT_AUDIT','待审核');
 announcementStatus.set('WAIT_PUSH','待发布');
 announcementStatus.set('REJECT','已拒绝');
@@ -65,6 +67,7 @@ btnMap.set('5','版本描述');
 export const versionDescStatus = new Map();
 versionDescStatus.set('all',[
     {value:'',text:'全部'},
+    {value:'DRAFT',text:'可编辑'},
     {value:'WAIT_AUDIT',text:'待审核'},
     {value:'WAIT_PUSH',text:'待发布'},
     {value:'REJECT',text:'已拒绝'},
@@ -72,6 +75,7 @@ versionDescStatus.set('all',[
     {value:'PUSH_FAIL',text:'发布失败'},
     {value:'PUSH_SUCC',text:'发布成功'},
 ]);
+versionDescStatus.set('DRAFT','可编辑');
 versionDescStatus.set('WAIT_AUDIT','待审核');
 versionDescStatus.set('WAIT_PUSH','待发布');
 versionDescStatus.set('REJECT','已拒绝');
@@ -87,6 +91,7 @@ versionDescStatus.set('PUSH_SUCC','发布成功');
 export const regularMailStatus = new Map();
 regularMailStatus.set('all',[
     {value:'',text:'全部'},
+    {value:'DRAFT',text:'可编辑'},
     {value:'WAIT_AUDIT',text:'待审核'},
     {value:'WAIT_PUSH',text:'待发布'},
     {value:'REJECT',text:'已拒绝'},
@@ -94,6 +99,7 @@ regularMailStatus.set('all',[
     {value:'PUSH_FAIL',text:'发布失败'},
     {value:'PUSH_SUCC',text:'发布成功'},
 ]);
+regularMailStatus.set('DRAFT','可编辑');
 regularMailStatus.set('WAIT_AUDIT','待审核');
 regularMailStatus.set('WAIT_PUSH','待发布');
 regularMailStatus.set('REJECT','已拒绝');
@@ -120,6 +126,7 @@ publishGroupMap.set('PART','指定用户');
 export const maintenanceNoticeStatus = new Map();
 maintenanceNoticeStatus.set('all',[
     {value:'',text:'全部'},
+    {value:'DRAFT',text:'可编辑'},
     {value:'WAIT_AUDIT',text:'待审核'},
     {value:'WAIT_PUSH',text:'待发布'},
     {value:'REJECT',text:'已拒绝'},
@@ -127,6 +134,7 @@ maintenanceNoticeStatus.set('all',[
     {value:'PUSH_FAIL',text:'发布失败'},
     {value:'PUSH_SUCC',text:'发布成功'},
 ]);
+maintenanceNoticeStatus.set('DRAFT','可编辑');
 maintenanceNoticeStatus.set('WAIT_AUDIT','待审核');
 maintenanceNoticeStatus.set('WAIT_PUSH','待发布');
 maintenanceNoticeStatus.set('REJECT','已拒绝');
@@ -141,6 +149,7 @@ maintenanceNoticeStatus.set('PUSH_SUCC','发布成功');
 export const limitedMallAdStatus = new Map();
 limitedMallAdStatus.set('all',[
     {value:'',text:'全部'},
+    {value:'DRAFT',text:'可编辑'},
     {value:'WAIT_AUDIT',text:'待审核'},
     {value:'WAIT_PUSH',text:'待发布'},
     {value:'REJECT',text:'已拒绝'},
@@ -148,6 +157,7 @@ limitedMallAdStatus.set('all',[
     {value:'PUSH_FAIL',text:'发布失败'},
     {value:'PUSH_SUCC',text:'发布成功'},
 ]);
+limitedMallAdStatus.set('DRAFT','可编辑');
 limitedMallAdStatus.set('WAIT_AUDIT','待审核');
 limitedMallAdStatus.set('WAIT_PUSH','待发布');
 limitedMallAdStatus.set('REJECT','已拒绝');
@@ -179,6 +189,7 @@ limitedMallAdTypeMap.set('4','广告样式四');
 export const legendMallAdStatus = new Map();
 legendMallAdStatus.set('all',[
     {value:'',text:'全部'},
+    {value:'DRAFT',text:'可编辑'},
     {value:'WAIT_AUDIT',text:'待审核'},
     {value:'WAIT_PUSH',text:'待发布'},
     {value:'REJECT',text:'已拒绝'},
@@ -186,6 +197,7 @@ legendMallAdStatus.set('all',[
     {value:'PUSH_FAIL',text:'发布失败'},
     {value:'PUSH_SUCC',text:'发布成功'},
 ]);
+legendMallAdStatus.set('DRAFT','可编辑');
 legendMallAdStatus.set('WAIT_AUDIT','待审核');
 legendMallAdStatus.set('WAIT_PUSH','待发布');
 legendMallAdStatus.set('REJECT','已拒绝');
@@ -233,6 +245,7 @@ battlepassAdTypeMap.set('4','广告样式四');
 export const battlepassMallAdStatus = new Map();
 battlepassMallAdStatus.set('all',[
     {value:'',text:'全部'},
+    {value:'DRAFT',text:'可编辑'},
     {value:'WAIT_AUDIT',text:'待审核'},
     {value:'WAIT_PUSH',text:'待发布'},
     {value:'REJECT',text:'已拒绝'},
@@ -240,6 +253,7 @@ battlepassMallAdStatus.set('all',[
     {value:'PUSH_FAIL',text:'发布失败'},
     {value:'PUSH_SUCC',text:'发布成功'},
 ]);
+battlepassMallAdStatus.set('DRAFT','可编辑');
 battlepassMallAdStatus.set('WAIT_AUDIT','待审核');
 battlepassMallAdStatus.set('WAIT_PUSH','待发布');
 battlepassMallAdStatus.set('REJECT','已拒绝');
@@ -254,6 +268,7 @@ battlepassMallAdStatus.set('PUSH_SUCC','发布成功');
 export const stopServiceStatus = new Map();
 stopServiceStatus.set('all',[
     {value:'',text:'全部'},
+    {value:'DRAFT',text:'可编辑'},
     {value:'WAIT_AUDIT',text:'待审核'},
     {value:'WAIT_PUSH',text:'待发布'},
     {value:'REJECT',text:'已拒绝'},
@@ -261,6 +276,7 @@ stopServiceStatus.set('all',[
     {value:'PUSH_FAIL',text:'发布失败'},
     {value:'PUSH_SUCC',text:'发布成功'},
 ]);
+stopServiceStatus.set('DRAFT','可编辑');
 stopServiceStatus.set('WAIT_AUDIT','待审核');
 stopServiceStatus.set('WAIT_PUSH','待发布');
 stopServiceStatus.set('REJECT','已拒绝');
