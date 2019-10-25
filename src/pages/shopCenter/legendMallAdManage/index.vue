@@ -29,7 +29,7 @@
                 </el-table-column>
                 <el-table-column prop="publisherName" label="发布者">
                 </el-table-column>
-                <el-table-column prop="publishAreaCode" label="发布区组">
+                <el-table-column prop="publishArea" label="发布区组">
                 </el-table-column>
                 <el-table-column prop="planPubStartTime" label="计划发布时间">
                 </el-table-column>
