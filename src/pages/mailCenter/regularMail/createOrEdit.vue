@@ -22,7 +22,7 @@
                 </el-col>
             </div>
         </el-form-item>
-        <el-form-item v-if="disabled" label="">
+        <el-form-item v-if="!disabled" label="">
             <el-button @click="addNewAppendix" type="text">继续添加</el-button>
         </el-form-item>
         <el-form-item label="发布区组" required>
