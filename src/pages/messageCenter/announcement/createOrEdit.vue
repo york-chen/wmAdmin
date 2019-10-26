@@ -65,6 +65,9 @@
             </el-col>
             <color-text type="warning">提示：请注意图片或文字是否与选择服务器一致</color-text>
         </el-form-item>
+        <el-form-item label="发布版本" prop="vers">
+            <el-input :disabled="disabled" v-model="form.vers"></el-input>
+        </el-form-item>
         <el-form-item label="定时发布" prop="planPubStartTime">
             <el-date-picker
                     :disabled="disabled"
@@ -104,7 +107,8 @@
                 planPubStartTime: [{required: true, message: '请选择定时发布时间', trigger: 'change'}],
                 planPubEndTime: [{required: true, message: '请选择定时关闭时间', trigger: 'change'}],
                 filelist: [{required: true, message: '请上传图片', trigger: 'change'}],
-                blank: [{required: true, message: '请输入公告标题', trigger: 'blur'}]
+                blank: [{required: true, message: '请输入公告标题', trigger: 'blur'}],
+                vers: [{required: true, message: '请输入发布版本', trigger: 'blur'}],
             };
             this.btnRule = {
               btn:[{required: true, message: '请选择显示按钮', trigger: 'change'}]
@@ -125,6 +129,7 @@
                     languageCode:'',
                     planPubStartTime:'',
                     planPubEndTime:'',
+                    vers:'',
                     filelist:[],
                     blank:'blank'//该字段没有作用，只是为了避免校验不过
                 }
@@ -158,7 +163,8 @@
                             "publishAreaCode":form.publishAreaCode,
                             "languageCode":form.languageCode,
                             "planPubStartTime": form.planPubStartTime,
-                            "planPubEndTime": form.planPubEndTime
+                            "planPubEndTime": form.planPubEndTime,
+                            vers:form.vers
                         }
                     }else{
                         data = {
@@ -172,6 +178,7 @@
                             "planPubEndTime": form.planPubEndTime,
                             "imgCodes":form.btns.map(item=>item.imgCode).join(','),
                             "showButton":form.btns.map(item=>item.btn).join(','),
+                            vers:form.vers
                         }
                     }
                     return data;

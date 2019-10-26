@@ -23,6 +23,9 @@
             </el-col>
             <color-text type="warning">提示：请注意图片或文字是否与选择服务器一致</color-text>
         </el-form-item>
+        <el-form-item label="发布版本" prop="vers">
+            <el-input :disabled="disabled" v-model="form.vers"></el-input>
+        </el-form-item>
         <el-form-item label="定时发布" prop="planPubStartTime">
             <el-date-picker :disabled="disabled"
                     v-model="form.planPubStartTime"

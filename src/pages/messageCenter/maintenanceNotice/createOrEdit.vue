@@ -20,6 +20,9 @@
             </el-col>
             <color-text type="warning">提示：请注意图片或文字是否与选择服务器一致</color-text>
         </el-form-item>
+        <el-form-item label="发布版本" prop="vers">
+            <el-input :disabled="disabled" v-model="form.vers"></el-input>
+        </el-form-item>
         <el-form-item label="定时发布" prop="planPubStartTime">
             <el-date-picker :disabled="disabled"
                     v-model="form.planPubStartTime"
@@ -48,6 +51,7 @@
         created(){
             this.rules = {
                 content: [{required: true, message: '请输入公告内容', trigger: 'blur'}],
+                vers: [{required: true, message: '请输入发布版本', trigger: 'blur'}],
                 publishAreaCode: [{required: true, message: '请选择发布区组', trigger: 'change'}],
                 languageCode: [{required: true, message: '请选择语言代号', trigger: 'change'}],
                 planPubStartTime: [{required: true, message: '请选择定时发布时间', trigger: 'change'}],
@@ -59,6 +63,7 @@
             return{
                 form:{
                     content: '',
+                    vers:'',
                     planPubStartTime:'',
                     pushTime: '',
                     publishAreaCode:'',

@@ -48,3 +48,13 @@ export const $axDelay = params => {
     }, params)
 };
 
+export const $axUploadFile = (params,process) => {
+    return axios({
+        method: 'post',
+        url: '/upload',
+        onUploadProgress:process,
+        headers:{
+            'Content-Type':'multipart/form-data'
+        }
+    }, params)
+};

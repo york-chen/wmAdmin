@@ -55,7 +55,8 @@ const httpServer = (opts, data) => {
         method: opts.method, // 必填
         url: `/api${opts.url}`, // 必填
         timeout: timeout,
-        headers: Object.assign(headers, opts.headers)
+        headers: Object.assign(headers, opts.headers),
+        onUploadProgress:opts.onUploadProgress
     };
     let params = data || {};
     if (httpDefaultOpts.headers['Content-Type'] === 'application/x-www-form-urlencoded') {
