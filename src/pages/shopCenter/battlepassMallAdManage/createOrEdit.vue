@@ -5,16 +5,9 @@
                 <el-option v-for="item in battlepassAdTypeMap.get('all')" :key="item.value" :label="item.text" :value="item.value"></el-option>
             </el-select>
         </el-form-item>
-        <el-form-item v-if="showUpload&&!disabled" label="图片上传" prop="filelist">
-            <upload-file :limit="10" v-model="form.filelist"></upload-file>
-        </el-form-item>
-        <el-form-item v-if="form.filelist.length" label="图片预览">
-            <div class="preview-wrap">
-                <template v-for="item in form.filelist">
-                    <img class="preview" :src="item.url" :key="item.id" alt="">
-                </template>
-            </div>
-        </el-form-item>
+        <el-row v-if="form.styleType==='1'">
+            <uploadImageBox :disabled="disabled" identity="1" v-model="form.imgs[0]" class="imgBox long"></uploadImageBox>
+        </el-row>
         <el-form-item label="发布区组" required>
             <el-col :span="6">
                 <el-form-item prop="publishAreaCode">
@@ -35,19 +28,18 @@
     </el-form>
 </template>
 <script>
-    import uploadFile from '@/components/upload-img'
     import areaMixin from '@/mixins/area-group'
     import colorText from '@/components/color-text'
+    import uploadImageBox from '@/components/uploadImageBox'
     import {battlepassAdTypeMap} from '@/utils/constents'
     export default {
-        components:{uploadFile,colorText},
+        components:{colorText,uploadImageBox},
         mixins:[areaMixin],
         created(){
             this.rules = {
                 styleType: [{required: true, message: '请选择广告样式', trigger: 'change'}],
                 publishAreaCode: [{required: true, message: '请选择发布区组', trigger: 'change'}],
-                languageCode: [{required: true, message: '请选择语言代号', trigger: 'change'}],
-                filelist: [{required: true, message: '请上传图片', trigger: 'change'}],
+                languageCode: [{required: true, message: '请选择语言代号', trigger: 'change'}]
             };
             this.battlepassAdTypeMap = battlepassAdTypeMap;
         },
@@ -57,9 +49,10 @@
                     styleType:'',
                     publishAreaCode:'',
                     languageCode:'',
-                    filelist:[]
-                },
-                showUpload:true
+                    imgs:[
+                        {imgCode:'',url:''}
+                    ]
+                }
             }
         },
         methods:{
@@ -68,11 +61,6 @@
                     ...this.form,
                     ...data
                 };
-                ///为了解决缩略图不显示的问题 后面优化
-                this.showUpload = false;
-                this.$nextTick(()=>{
-                    this.showUpload = true;
-                })
             },
             getData(){
                 let flag = false;
@@ -83,8 +71,8 @@
                     return flag
                 }else{
                     let _form = JSON.parse(JSON.stringify(this.form));
-                    _form.imgCodes = _form.filelist.map(item=>item.imgCode).join(',');
-                    delete _form.filelist;
+                    _form.imgCodes = _form.imgs.map(item=>item.imgCode).join(',');
+                    delete _form.imgs;
                     return _form
                 }
             }
@@ -92,13 +80,12 @@
     }
 </script>
 <style type="text/scss" lang="scss">
-    .preview-wrap{
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        .preview{
-            width: 25%;
-            margin-right: 5%;
+    .imgBox{
+        height: 100px;
+        width: 96%;
+        margin-bottom: 5px;
+        &.long{
+            height: 200px;
         }
     }
 </style>

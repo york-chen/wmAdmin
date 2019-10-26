@@ -139,10 +139,6 @@
                     this.openDialog();
                     //处理一下 数据
                     let data = res[1];
-                    if(data.showButton){
-                        let btns = data.showButton.split(',');
-                        data.imgs = data.imgs.map((item,index)=>({imgCode:item.imgCode,url:item.url,buttonId:btns[index]}));
-                    }
                     this.$nextTick(()=>{
                         this.$refs['creditOrEdit'].initFormData(data);
                     })

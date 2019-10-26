@@ -88,13 +88,12 @@
     </el-form>
 </template>
 <script>
-    import uploadFile from '@/components/upload-img'
     import areaMixin from '@/mixins/area-group'
     import colorText from '@/components/color-text'
     import uploadImageBox from '@/components/uploadImageBox'
     import {templateMap,templateTypeMap,btnMap} from '@/utils/constents'
     export default {
-        components:{uploadFile,colorText,uploadImageBox},
+        components:{colorText,uploadImageBox},
         mixins:[areaMixin],
         created(){
             this.rules = {
@@ -124,7 +123,6 @@
                     planPubStartTime:'',
                     planPubEndTime:'',
                     vers:'',
-                    blank:'blank',//该字段没有作用，只是为了避免校验不过
                     imgs:[{buttonId:'',imgCode:'',url:''},{buttonId:'',imgCode:'',url:''},{buttonId:'',imgCode:'',url:''}]
                 },
             }
@@ -182,15 +180,6 @@
     }
 </script>
 <style type="text/scss" lang="scss">
-.preview-wrap{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    .preview{
-        width: 25%;
-        margin-right: 5%;
-    }
-}
 .imgBox{
     height: 150px;
     width: 96%

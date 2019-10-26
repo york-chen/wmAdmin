@@ -173,13 +173,11 @@ export const limitedMallAdTypeMap = new Map();
 limitedMallAdTypeMap.set('all',[
     {value:'1',text:'广告样式一'},
     {value:'2',text:'广告样式二'},
-    {value:'3',text:'广告样式三'},
-    {value:'4',text:'广告样式四'}
+    {value:'3',text:'广告样式三'}
 ]);
 limitedMallAdTypeMap.set('1','广告样式一');
 limitedMallAdTypeMap.set('2','广告样式二');
 limitedMallAdTypeMap.set('3','广告样式三');
-limitedMallAdTypeMap.set('4','广告样式四');
 
 
 /**
@@ -211,15 +209,9 @@ legendMallAdStatus.set('PUSH_SUCC','发布成功');
 */
 export const legendMallAdTypeMap = new Map();
 legendMallAdTypeMap.set('all',[
-    {value:'1',text:'广告样式一'},
-    {value:'2',text:'广告样式二'},
-    {value:'3',text:'广告样式三'},
-    {value:'4',text:'广告样式四'}
+    {value:'1',text:'广告样式一'}
 ]);
 legendMallAdTypeMap.set('1','广告样式一');
-legendMallAdTypeMap.set('2','广告样式二');
-legendMallAdTypeMap.set('3','广告样式三');
-legendMallAdTypeMap.set('4','广告样式四');
 
 
 /**
@@ -228,15 +220,9 @@ legendMallAdTypeMap.set('4','广告样式四');
 */
 export const battlepassAdTypeMap = new Map();
 battlepassAdTypeMap.set('all',[
-    {value:'1',text:'广告样式一'},
-    {value:'2',text:'广告样式二'},
-    {value:'3',text:'广告样式三'},
-    {value:'4',text:'广告样式四'}
+    {value:'1',text:'广告样式一'}
 ]);
 battlepassAdTypeMap.set('1','广告样式一');
-battlepassAdTypeMap.set('2','广告样式二');
-battlepassAdTypeMap.set('3','广告样式三');
-battlepassAdTypeMap.set('4','广告样式四');
 
 /**
  * battlepass商城广告 状态类型枚举
