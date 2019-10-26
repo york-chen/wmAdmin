@@ -141,8 +141,7 @@
                     let data = res[1];
                     if(data.showButton){
                         let btns = data.showButton.split(',');
-                        data.filelist = data.imgs.map(item=>({imgCode:item.imgCode,url:item.url,_url:null}));
-                        data.btns = data.imgs.map((item,index)=>({imgCode:item.imgCode,url:item.url,_url:null,btn:btns[index]}));
+                        data.imgs = data.imgs.map((item,index)=>({imgCode:item.imgCode,url:item.url,buttonId:btns[index]}));
                     }
                     this.$nextTick(()=>{
                         this.$refs['creditOrEdit'].initFormData(data);
