@@ -2,7 +2,7 @@
     <div class="page-wrap">
         <SearchPannel>
             <div slot="condition">
-                <el-select v-model="queryParams.status" placeholder="请选择">
+                <el-select @change="queryStatusChange" v-model="queryParams.status" placeholder="请选择">
                     <el-option
                             v-for="item in statusMap.get('all')"
                             :key="item.value"

@@ -58,6 +58,9 @@
         <el-form-item v-if="form.publishGroup==='PART'&&!disabled" label="上传用户ID" prop="userids">
             <upload-file :disabled="disabled" :limit="1" v-model="form.userids"></upload-file>
         </el-form-item>
+        <el-form-item v-if="form.publishGroup==='PART'&&disabled&&form.assginUserFile&&form.assginUserFile.url" label="查看用户ID">
+            <el-link target="_blank" download="用户ID.txt" :underline="false" :href="form.assginUserFile.url" type="primary">点击查看</el-link>
+        </el-form-item>
     </el-form>
 </template>
 <script>
