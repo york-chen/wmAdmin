@@ -168,7 +168,7 @@
                             "languageCode":form.languageCode,
                             "planPubStartTime": form.planPubStartTime,
                             "planPubEndTime": form.planPubEndTime,
-                            "imgCodes":form.imgs.map(item=>item.imgCode).join(','),
+                            "imgCodes":form.imgs.map(item=>item.imgCode?item.imgCode:'{noop}').join(','),
                             "showButton":form.imgs.map(item=>item.buttonId).join(','),
                             vers:form.vers
                         }
@@ -179,9 +179,9 @@
         }
     }
 </script>
-<style type="text/scss" lang="scss">
+<style type="text/scss" scoped lang="scss">
 .imgBox{
-    height: 150px;
-    width: 96%
+    height: 153px;
+    width: 266px
 }
 </style>

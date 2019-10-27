@@ -69,7 +69,7 @@
         }
     }
 </script>
-<style type="text/scss" lang="scss">
+<style type="text/scss" scoped lang="scss">
     .form-wrap{
         .strong{
             font-weight: bold;

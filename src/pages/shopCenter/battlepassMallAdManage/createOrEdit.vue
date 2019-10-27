@@ -50,7 +50,7 @@
                     publishAreaCode:'',
                     languageCode:'',
                     imgs:[
-                        {imgCode:'{{noop}}',url:''}
+                        {imgCode:'',url:''}
                     ]
                 }
             }
@@ -71,7 +71,7 @@
                     return flag
                 }else{
                     let _form = JSON.parse(JSON.stringify(this.form));
-                    _form.imgCodes = _form.imgs.map(item=>item.imgCode).join(',');
+                    _form.imgCodes = _form.imgs.map(item=>item.imgCode?item.imgCode:'{noop}').join(',');
                     delete _form.imgs;
                     return _form
                 }
@@ -79,7 +79,7 @@
         }
     }
 </script>
-<style type="text/scss" lang="scss">
+<style type="text/scss" scoped lang="scss">
     .imgBox{
         height: 100px;
         width: 96%;

@@ -48,7 +48,7 @@
                 </el-table-column>
             </el-table>
         </TableBox>
-        <el-dialog center :visible.sync="showDialog">
+        <el-dialog width="960px" center :visible.sync="showDialog">
             <credit-or-edit :operateType="operateType" v-if="showDialog" ref="creditOrEdit"></credit-or-edit>
             <span slot="footer" class="dialog-footer">
                 <template v-if="btnStatus._showSave">
@@ -139,6 +139,10 @@
                     this.openDialog();
                     //处理一下 数据
                     let data = res[1];
+                    if(data.showButton){
+                        let btns = data.showButton.split(',');
+                        data.imgs = data.imgs.map((item,index)=>({imgCode:item.imgCode,url:item.url,buttonId:btns[index]}));
+                    }
                     this.$nextTick(()=>{
                         this.$refs['creditOrEdit'].initFormData(data);
                     })

@@ -124,13 +124,13 @@
                     publishAreaCode:'',
                     languageCode:'',
                     imgs:[
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''}
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''}
                     ]
                 }
             }
@@ -151,7 +151,7 @@
                     return flag
                 }else{
                     let _form = JSON.parse(JSON.stringify(this.form));
-                    _form.imgCodes = _form.imgs.map(item=>item.imgCode).join(',');
+                    _form.imgCodes = _form.imgs.map(item=>item.imgCode?item.imgCode:'').join(',');
                     delete _form.imgs;
                     return _form
                 }
@@ -161,35 +161,35 @@
             'form.styleType'(val){
                 if(val ==='1'){
                     this.imgs = [
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''}
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''}
                     ];
                 }else if(val === '2' || val === '3'){
                     this.imgs = this.imgs = [
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''}
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''}
                     ];
                 }
             }
         }
     }
 </script>
-<style type="text/scss" lang="scss">
+<style type="text/scss" scoped lang="scss">
     .imgBox{
-        height: 100px;
-        width: 96%;
-        margin-bottom: 5px;
+        height: 177px;
+        width: 218px;
+        margin-bottom: 2px;
         &.long{
-            height: 207px;
+            height: 358px;
         }
     }
 </style>

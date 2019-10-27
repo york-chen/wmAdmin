@@ -8,21 +8,21 @@
         <el-row v-if="form.styleType==='1'">
             <el-col :span="8">
                 <el-row>
-                    <uploadImageBox :disabled="disabled" identity="1" v-model="form.imgs[0]" class="imgBox"></uploadImageBox>
+                    <uploadImageBox :disabled="disabled" identity="1" v-model="form.imgs[0]" class="imgBox1"></uploadImageBox>
                 </el-row>
                 <el-row>
-                    <uploadImageBox :disabled="disabled" identity="2" v-model="form.imgs[0]" class="imgBox"></uploadImageBox>
+                    <uploadImageBox :disabled="disabled" identity="2" v-model="form.imgs[0]" class="imgBox2"></uploadImageBox>
                 </el-row>
             </el-col>
             <el-col :span="8">
-                <uploadImageBox :disabled="disabled" identity="3" v-model="form.imgs[0]" class="imgBox long"></uploadImageBox>
+                <uploadImageBox :disabled="disabled" identity="3" v-model="form.imgs[0]" class="imgBox3"></uploadImageBox>
             </el-col>
             <el-col :span="8">
                 <el-row>
-                    <uploadImageBox :disabled="disabled" identity="4" v-model="form.imgs[0]" class="imgBox"></uploadImageBox>
+                    <uploadImageBox :disabled="disabled" identity="4" v-model="form.imgs[0]" class="imgBox1"></uploadImageBox>
                 </el-row>
                 <el-row>
-                    <uploadImageBox :disabled="disabled" identity="5" v-model="form.imgs[0]" class="imgBox"></uploadImageBox>
+                    <uploadImageBox :disabled="disabled" identity="5" v-model="form.imgs[0]" class="imgBox2"></uploadImageBox>
                 </el-row>
             </el-col>
         </el-row>
@@ -68,11 +68,11 @@
                     publishAreaCode:'',
                     languageCode:'',
                     imgs:[
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''},
-                        {imgCode:'{{noop}}',url:''}
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''},
+                        {imgCode:'',url:''}
                     ]
                 }
             }
@@ -93,7 +93,7 @@
                     return flag
                 }else{
                     let _form = JSON.parse(JSON.stringify(this.form));
-                    _form.imgCodes = _form.imgs.map(item=>item.imgCode).join(',');
+                    _form.imgCodes = _form.imgs.map(item=>item.imgCode?item.imgCode:'').join(',');
                     delete _form.imgs;
                     return _form
                 }
@@ -101,13 +101,17 @@
         }
     }
 </script>
-<style type="text/scss" lang="scss">
-    .imgBox{
-        height: 100px;
-        width: 96%;
-        margin-bottom: 5px;
-        &.long{
-            height: 207px;
-        }
+<style type="text/scss" scoped lang="scss">
+    .imgBox1{
+        width: 300px;
+        height: 181px;
+    }
+    .imgBox2{
+        width: 300px;
+        height: 272px;
+    }
+    .imgBox3{
+        width: 300px;
+        height: 455px;
     }
 </style>
