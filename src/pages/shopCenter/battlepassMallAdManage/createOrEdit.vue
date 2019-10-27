@@ -6,7 +6,7 @@
             </el-select>
         </el-form-item>
         <el-row class="imgs-wrap" v-if="form.styleType==='1'">
-            <uploadImageBox :disabled="disabled" identity="1" v-model="form.imgs[0]" class="imgBox long"></uploadImageBox>
+            <uploadImageBox :disabled="disabled" identity="1" v-model="form.imgs[0]" class="imgBox"></uploadImageBox>
         </el-row>
         <el-form-item label="发布区组" required>
             <el-col :span="6">
@@ -83,12 +83,8 @@
     .imgs-wrap{
         margin-bottom: 15px;
         .imgBox{
-            height: 100px;
-            width: 96%;
+            height: 511px;
             margin-bottom: 5px;
-            &.long{
-                height: 200px;
-            }
         }
     }
 </style>

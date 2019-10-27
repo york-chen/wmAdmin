@@ -160,7 +160,7 @@
         watch:{
             'form.styleType'(val){
                 if(val ==='1'){
-                    this.imgs = [
+                    this.form.imgs = [
                         {imgCode:'',url:''},
                         {imgCode:'',url:''},
                         {imgCode:'',url:''},
@@ -170,7 +170,7 @@
                         {imgCode:'',url:''}
                     ];
                 }else if(val === '2' || val === '3'){
-                    this.imgs = this.imgs = [
+                    this.form.imgs = [
                         {imgCode:'',url:''},
                         {imgCode:'',url:''},
                         {imgCode:'',url:''},
