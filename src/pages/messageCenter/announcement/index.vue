@@ -141,7 +141,7 @@
                     let data = res[1];
                     if(data.showButton){
                         let btns = data.showButton.split(',');
-                        data.imgs = data.imgs.map((item,index)=>({imgCode:item.imgCode,url:item.url,buttonId:btns[index]}));
+                        data.imgs = data.imgs.map((item,index)=>({imgCode:item.imgCode,url:item.url,buttonId:btns[index]==='0'?'':btns[index]}));
                     }
                     this.$nextTick(()=>{
                         this.$refs['creditOrEdit'].initFormData(data);

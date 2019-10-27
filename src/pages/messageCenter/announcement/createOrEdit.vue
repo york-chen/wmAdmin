@@ -38,7 +38,7 @@
                         </el-row>
                         <el-row>
                             <el-form-item>
-                                <el-select :disabled="disabled" v-model="objImg.buttonId" placeholder="请选择显示按钮">
+                                <el-select :clearable="true" :disabled="disabled" v-model="objImg.buttonId" placeholder="请选择显示按钮">
                                     <el-option v-for="item in btnMap.get('all')" :key="item.value" :label="item.text" :value="item.value"></el-option>
                                 </el-select>
                             </el-form-item>
@@ -159,6 +159,12 @@
                             vers:form.vers
                         }
                     }else{
+                        for(let item of form.imgs){
+                            if(item.buttonId&&!item.imgCode ||!item.buttonId&&item.imgCode){
+                                this.$message.warning('图片和按钮需一一对应,都选或者都不选');
+                                return false;
+                            }
+                        }
                         data = {
                             id:form.id,
                             businessId:form.businessId,
@@ -169,7 +175,7 @@
                             "planPubStartTime": form.planPubStartTime,
                             "planPubEndTime": form.planPubEndTime,
                             "imgCodes":form.imgs.map(item=>item.imgCode?item.imgCode:'{noop}').join(','),
-                            "showButton":form.imgs.map(item=>item.buttonId).join(','),
+                            "showButton":form.imgs.map(item=>item.buttonId?item.buttonId:'0').join(','),
                             vers:form.vers
                         }
                     }
