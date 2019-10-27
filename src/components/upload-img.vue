@@ -61,10 +61,11 @@ export default {
             this.$message.warning(`当前限制选择 ${this.limit} 个文件，本次选择了 ${files.length} 个文件。`);
         },
         uploadSuc(response,file,filelist){
+            let data = response.data;
             filelist.forEach(item=>{
                 if(item.uid === file.uid){
-                    item.imgCode = response.imgCode;
-                    item._url = response.url;
+                    item.imgCode = data.imgCode;
+                    item._url = data.url;
                 }
             });
             this.$emit('change',filelist.map(item=>({imgCode:item.imgCode,url:item._url,_url:item.url})));
