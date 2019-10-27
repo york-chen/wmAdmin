@@ -6,7 +6,7 @@ const webpack = require('webpack');
 const HappyPack = require('happypack');
 const os = require('os');
 const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length});
-const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
+// const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const CompressionPlugin = require('compression-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 require('./common');
@@ -158,7 +158,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin({cleanOnceBeforeBuildPatterns: ['!static']}),
         new CompressionPlugin(),
-        new BundleAnalyzerPlugin({analyzerPort: 8919}),
+        // new BundleAnalyzerPlugin({analyzerPort: 8919}),
         new VueLoaderPlugin(),
         new webpack.DllReferencePlugin({
             manifest: require(path.join(__dirname, '..', 'vendor1-manifest.json')),
