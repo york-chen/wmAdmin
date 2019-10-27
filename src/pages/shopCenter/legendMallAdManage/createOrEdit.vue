@@ -5,7 +5,7 @@
                 <el-option v-for="item in legendMallAdTypeMap.get('all')" :key="item.value" :label="item.text" :value="item.value"></el-option>
             </el-select>
         </el-form-item>
-        <el-row v-if="form.styleType==='1'">
+        <el-row class="imgs-wrap" v-if="form.styleType==='1'">
             <el-col :span="8">
                 <el-row>
                     <uploadImageBox :disabled="disabled" identity="1" v-model="form.imgs[0]" class="imgBox1"></uploadImageBox>
@@ -83,8 +83,6 @@
                     ...this.form,
                     ...data
                 };
-                console.log(this.form);
-                debugger
             },
             getData(){
                 let flag = false;
@@ -104,16 +102,19 @@
     }
 </script>
 <style type="text/scss" scoped lang="scss">
-    .imgBox1{
-        width: 300px;
-        height: 181px;
-    }
-    .imgBox2{
-        width: 300px;
-        height: 272px;
-    }
-    .imgBox3{
-        width: 300px;
-        height: 455px;
+    .imgs-wrap{
+        margin-bottom: 15px;
+        .imgBox1{
+            width: 300px;
+            height: 181px;
+        }
+        .imgBox2{
+            width: 300px;
+            height: 272px;
+        }
+        .imgBox3{
+            width: 300px;
+            height: 455px;
+        }
     }
 </style>

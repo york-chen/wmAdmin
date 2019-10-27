@@ -48,7 +48,7 @@
                 </el-table-column>
             </el-table>
         </TableBox>
-        <el-dialog center :visible.sync="showDialog">
+        <el-dialog width="960px" center :visible.sync="showDialog">
             <credit-or-edit :operateType=operateType v-if="showDialog" ref="creditOrEdit"></credit-or-edit>
             <span slot="footer" class="dialog-footer">
                 <template v-if="btnStatus._showSave">

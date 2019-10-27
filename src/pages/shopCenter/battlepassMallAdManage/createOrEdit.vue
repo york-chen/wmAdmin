@@ -5,7 +5,7 @@
                 <el-option v-for="item in battlepassAdTypeMap.get('all')" :key="item.value" :label="item.text" :value="item.value"></el-option>
             </el-select>
         </el-form-item>
-        <el-row v-if="form.styleType==='1'">
+        <el-row class="imgs-wrap" v-if="form.styleType==='1'">
             <uploadImageBox :disabled="disabled" identity="1" v-model="form.imgs[0]" class="imgBox long"></uploadImageBox>
         </el-row>
         <el-form-item label="发布区组" required>
@@ -80,12 +80,15 @@
     }
 </script>
 <style type="text/scss" scoped lang="scss">
-    .imgBox{
-        height: 100px;
-        width: 96%;
-        margin-bottom: 5px;
-        &.long{
-            height: 200px;
+    .imgs-wrap{
+        margin-bottom: 15px;
+        .imgBox{
+            height: 100px;
+            width: 96%;
+            margin-bottom: 5px;
+            &.long{
+                height: 200px;
+            }
         }
     }
 </style>

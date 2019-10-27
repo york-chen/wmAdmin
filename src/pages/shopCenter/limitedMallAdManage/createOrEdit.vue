@@ -5,7 +5,7 @@
                 <el-option v-for="item in limitedMallAdTypeMap.get('all')" :key="item.value" :label="item.text" :value="item.value"></el-option>
             </el-select>
         </el-form-item>
-        <el-row v-if="form.styleType==='1'">
+        <el-row class="imgs-wrap" v-if="form.styleType==='1'">
             <el-col :span="6">
                 <uploadImageBox :disabled="disabled" identity="1" v-model="form.imgs[0]" class="imgBox long"></uploadImageBox>
             </el-col>
@@ -34,7 +34,7 @@
                 </el-row>
             </el-col>
         </el-row>
-        <el-row v-if="form.styleType==='2'">
+        <el-row class="imgs-wrap" v-if="form.styleType==='2'">
             <el-col :span="6">
                 <uploadImageBox :disabled="disabled" identity="1" v-model="form.imgs[0]" class="imgBox long"></uploadImageBox>
             </el-col>
@@ -58,7 +58,7 @@
                 </el-row>
             </el-col>
         </el-row>
-        <el-row v-if="form.styleType==='3'">
+        <el-row class="imgs-wrap" v-if="form.styleType==='3'">
             <el-col :span="6">
                 <uploadImageBox :disabled="disabled" identity="1" v-model="form.imgs[0]" class="imgBox long"></uploadImageBox>
             </el-col>
@@ -184,6 +184,8 @@
     }
 </script>
 <style type="text/scss" scoped lang="scss">
+.imgs-wrap{
+    margin-bottom: 15px;
     .imgBox{
         height: 177px;
         width: 218px;
@@ -192,4 +194,5 @@
             height: 358px;
         }
     }
+}
 </style>
