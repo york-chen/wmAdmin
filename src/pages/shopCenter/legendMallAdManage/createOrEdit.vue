@@ -11,18 +11,18 @@
                     <uploadImageBox :disabled="disabled" identity="1" v-model="form.imgs[0]" class="imgBox1"></uploadImageBox>
                 </el-row>
                 <el-row>
-                    <uploadImageBox :disabled="disabled" identity="2" v-model="form.imgs[0]" class="imgBox2"></uploadImageBox>
+                    <uploadImageBox :disabled="disabled" identity="2" v-model="form.imgs[1]" class="imgBox2"></uploadImageBox>
                 </el-row>
             </el-col>
             <el-col :span="8">
-                <uploadImageBox :disabled="disabled" identity="3" v-model="form.imgs[0]" class="imgBox3"></uploadImageBox>
+                <uploadImageBox :disabled="disabled" identity="3" v-model="form.imgs[2]" class="imgBox3"></uploadImageBox>
             </el-col>
             <el-col :span="8">
                 <el-row>
-                    <uploadImageBox :disabled="disabled" identity="4" v-model="form.imgs[0]" class="imgBox1"></uploadImageBox>
+                    <uploadImageBox :disabled="disabled" identity="4" v-model="form.imgs[3]" class="imgBox1"></uploadImageBox>
                 </el-row>
                 <el-row>
-                    <uploadImageBox :disabled="disabled" identity="5" v-model="form.imgs[0]" class="imgBox2"></uploadImageBox>
+                    <uploadImageBox :disabled="disabled" identity="5" v-model="form.imgs[4]" class="imgBox2"></uploadImageBox>
                 </el-row>
             </el-col>
         </el-row>
@@ -83,6 +83,8 @@
                     ...this.form,
                     ...data
                 };
+                console.log(this.form);
+                debugger
             },
             getData(){
                 let flag = false;
