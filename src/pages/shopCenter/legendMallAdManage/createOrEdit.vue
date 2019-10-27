@@ -68,11 +68,11 @@
                     publishAreaCode:'',
                     languageCode:'',
                     imgs:[
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''}
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''}
                     ]
                 }
             }

@@ -15,18 +15,18 @@
                         <uploadImageBox :disabled="disabled" identity="2" v-model="form.imgs[1]" class="imgBox"></uploadImageBox>
                         </el-col>
                     <el-col :span="8">
-                        <uploadImageBox :disabled="disabled" identity="3" v-model="form.imgs[2]" class="imgBox"></uploadImageBox>
+                        <uploadImageBox :disabled="disabled" identity="4" v-model="form.imgs[3]" class="imgBox"></uploadImageBox>
                     </el-col>
                     <el-col :span="8">
-                        <uploadImageBox :disabled="disabled" identity="4" v-model="form.imgs[3]" class="imgBox"></uploadImageBox>
+                        <uploadImageBox :disabled="disabled" identity="6" v-model="form.imgs[5]" class="imgBox"></uploadImageBox>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="8">
-                        <uploadImageBox :disabled="disabled" identity="5" v-model="form.imgs[4]" class="imgBox"></uploadImageBox>
+                        <uploadImageBox :disabled="disabled" identity="3" v-model="form.imgs[2]" class="imgBox"></uploadImageBox>
                     </el-col>
                     <el-col :span="8">
-                        <uploadImageBox :disabled="disabled" identity="6" v-model="form.imgs[5]" class="imgBox"></uploadImageBox>
+                        <uploadImageBox :disabled="disabled" identity="5" v-model="form.imgs[4]" class="imgBox"></uploadImageBox>
                     </el-col>
                     <el-col :span="8">
                         <uploadImageBox :disabled="disabled" identity="7" v-model="form.imgs[6]" class="imgBox"></uploadImageBox>
@@ -124,13 +124,13 @@
                     publishAreaCode:'',
                     languageCode:'',
                     imgs:[
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''}
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''}
                     ]
                 }
             }
@@ -161,22 +161,22 @@
             'form.styleType'(val){
                 if(val ==='1'){
                     this.imgs = [
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''}
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''}
                     ];
                 }else if(val === '2' || val === '3'){
                     this.imgs = this.imgs = [
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''},
-                        {imgCode:'',url:''}
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''},
+                        {imgCode:'{{noop}}',url:''}
                     ];
                 }
             }

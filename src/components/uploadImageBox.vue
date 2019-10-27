@@ -86,7 +86,7 @@ export default {
                 this.url = '';
                 this.loading = false;
                 this.percentage = 10;
-                this.imgCode = '';
+                this.imgCode = '{{noop}}';
                 this.$refs['files'].value = '';
                 this.imgData.url = this.url;
                 this.imgData.imgCode = this.imgCode;
@@ -123,7 +123,7 @@ export default {
         },
         doDelete(){
             this.url = '';
-            this.imgCode = '';
+            this.imgCode = '{{noop}}';
             this.percentage = 10;
             this.$emit('change',{...this.imgData,url:this.url,imgCode:this.imgCode});
         }

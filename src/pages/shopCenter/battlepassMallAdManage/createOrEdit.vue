@@ -50,7 +50,7 @@
                     publishAreaCode:'',
                     languageCode:'',
                     imgs:[
-                        {imgCode:'',url:''}
+                        {imgCode:'{{noop}}',url:''}
                     ]
                 }
             }
