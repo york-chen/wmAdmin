@@ -1,7 +1,7 @@
 <template>
     <el-form :model="form" :rules="rules" ref="form" label-width="80px" class="form-wrap">
         <el-form-item label="广告选择" prop="styleType">
-            <el-select :disabled="disabled" v-model="form.styleType" placeholder="请选择公告模板">
+            <el-select @change="styleTypeChange" :disabled="disabled" v-model="form.styleType" placeholder="请选择公告模板">
                 <el-option v-for="item in limitedMallAdTypeMap.get('all')" :key="item.value" :label="item.text" :value="item.value"></el-option>
             </el-select>
         </el-form-item>
@@ -155,10 +155,8 @@
                     delete _form.imgs;
                     return _form
                 }
-            }
-        },
-        watch:{
-            'form.styleType'(val){
+            },
+            styleTypeChange(val){
                 if(val ==='1'){
                     this.form.imgs = [
                         {imgCode:'',url:''},

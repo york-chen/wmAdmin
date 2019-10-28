@@ -44,7 +44,7 @@ export default {
         return {
             showMask:false,
             url:this.imgData.url,
-            imngCode:this.imgData.imgCode,
+            imgCode:this.imgData.imgCode,
             percentage:10,
             loading:false
         }
@@ -125,7 +125,9 @@ export default {
             this.url = '';
             this.imgCode = '';
             this.percentage = 10;
-            this.$emit('change',{...this.imgData,url:this.url,imgCode:this.imgCode});
+            this.imgData.url = '';
+            this.imgData.imgCode = '';
+            this.$emit('change',this.imgData);
         }
     }
 }
